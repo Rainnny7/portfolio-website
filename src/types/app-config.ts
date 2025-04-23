@@ -9,8 +9,15 @@ export type SocialConfig = {
     href: string;
 };
 
+export type Skill = {
+    name: string;
+    icon: string;
+    link: string;
+};
+
 export type AppConfig = {
     discordUserId: Snowflake;
     socials: Record<"discord" | "github" | "email", SocialConfig>;
     about: ReactNode;
+    skills: Skill[];
 };

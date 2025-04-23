@@ -10,6 +10,7 @@ import {
     GithubProjectResponse,
 } from "~/actions/get-github-repos";
 import PaginationControls from "~/components/pagination-controls";
+import SimpleTooltip from "~/components/simple-tooltip";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Page, Paginator } from "~/lib/paginator";
 import { truncateText } from "~/lib/string";
@@ -41,13 +42,13 @@ const ProjectsSection = (): ReactElement => {
     }, [page, githubResponse]);
 
     return (
-        <section id="projects" className="flex flex-col gap-4">
+        <section id="projects" className="py-40 flex flex-col gap-4">
             <motion.h2
                 id="projects"
                 className="text-4xl font-bold flex gap-4 items-center"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1 }}
+                transition={{ duration: 0.5, delay: 1.5 }}
             >
                 <Briefcase className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
                 My Projects
@@ -62,7 +63,7 @@ const ProjectsSection = (): ReactElement => {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{
                         duration: 0.5,
-                        delay: 0.7,
+                        delay: 1,
                     }}
                 >
                     {Array.from({ length: 5 }).map((_, index: number) => (
@@ -75,57 +76,15 @@ const ProjectsSection = (): ReactElement => {
             ) : (
                 // Projects
                 <div className="flex flex-col gap-4">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    <div className="flex flex-wrap gap-4 items-center">
                         {pagedProjects?.items?.map(
                             (project: GithubProject, index: number) => (
-                                <motion.div
+                                <Project
                                     key={project.id}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{
-                                        duration: 0.5,
-                                        delay: 0.45 + index * 0.1,
-                                    }}
-                                >
-                                    <Link
-                                        className="p-4 h-[9.5rem] flex flex-col bg-background/50 backdrop-blur-sm border border-border rounded-2xl hover:border-primary/50 transition-colors transform-gpu"
-                                        href={project.html_url}
-                                        target="_blank"
-                                        draggable={false}
-                                    >
-                                        {/* Repository Name & Pin Badge */}
-                                        <div className="flex items-center justify-between">
-                                            <h3 className="text-xl font-semibold">
-                                                {project.name}
-                                            </h3>
-                                            {project.isPinned && (
-                                                <Pin className="size-4 text-red-500" />
-                                            )}
-                                        </div>
-
-                                        {/* Repository Description */}
-                                        <p className="text-muted-foreground mt-2">
-                                            {truncateText(
-                                                project.description ??
-                                                    "No description );",
-                                                124
-                                            )}
-                                        </p>
-
-                                        {/* Repository Language, Stars, & Forks */}
-                                        <div className="mt-auto flex gap-4 text-sm text-muted-foreground">
-                                            {project.language && (
-                                                <span>
-                                                    {project.language.name}
-                                                </span>
-                                            )}
-                                            <span>
-                                                ⭐ {project.stargazers_count}
-                                            </span>
-                                            <span>🍴 {project.forks}</span>
-                                        </div>
-                                    </Link>
-                                </motion.div>
+                                    project={project}
+                                    index={index}
+                                    page={page}
+                                />
                             )
                         )}
                     </div>
@@ -152,4 +111,106 @@ const ProjectsSection = (): ReactElement => {
         </section>
     );
 };
+
+const Project = ({
+    project,
+    index,
+    page,
+}: {
+    project: GithubProject;
+    index: number;
+    page: number;
+}): ReactElement => (
+    <SimpleTooltip
+        content={
+            <span>
+                Click to view <b>{project.nameWithOwner}</b> on GitHub
+            </span>
+        }
+        side="bottom"
+    >
+        <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{
+                duration: 0.5,
+                delay: (page === 1 ? 0.9 : 0.2) + index * 0.1,
+            }}
+        >
+            <Link
+                className="p-4 w-[20rem] xl:w-[22rem] 2xl:w-[30rem] min-h-[12.5rem] 2xl:min-h-[9.5rem] flex flex-col gap-2 bg-background/50 backdrop-blur-sm border border-border rounded-2xl hover:border-primary/50 transition-colors transform-gpu"
+                href={project.html_url}
+                target="_blank"
+                draggable={false}
+            >
+                {/* Repository Name & Pin Badge */}
+                <div className="flex items-center justify-between">
+                    <h3 className="text-xl font-semibold">{project.name}</h3>
+                    {project.isPinned && (
+                        <SimpleTooltip
+                            content="This repository is pinned!"
+                            side="bottom"
+                        >
+                            <Pin className="size-4 text-red-500" />
+                        </SimpleTooltip>
+                    )}
+                </div>
+
+                {/* Repository Description */}
+                <p className="text-muted-foreground font-light mt-1">
+                    {truncateText(
+                        project.description ?? "No description );",
+                        124
+                    )}
+                </p>
+
+                {/* Repository Language, Stars, & Forks */}
+                <div className="mt-auto flex gap-4 text-sm text-muted-foreground">
+                    {/* Language */}
+                    {project.language && (
+                        <SimpleTooltip
+                            content={
+                                <span>
+                                    This project is made with{" "}
+                                    <b>{project.language.name}</b>
+                                </span>
+                            }
+                            side="bottom"
+                        >
+                            <span>{project.language.name}</span>
+                        </SimpleTooltip>
+                    )}
+
+                    {/* Stars */}
+                    <SimpleTooltip
+                        content={
+                            <span>
+                                This project has {project.stargazers_count} star
+                                {project.stargazers_count === 1 ? "" : "s"}
+                            </span>
+                        }
+                        side="bottom"
+                    >
+                        <span>⭐ {project.stargazers_count}</span>
+                    </SimpleTooltip>
+
+                    {/* Forks */}
+                    <SimpleTooltip
+                        content={
+                            <span>
+                                This project has {project.forks} fork
+                                {project.forks === 1 ? "" : "s"}
+                            </span>
+                        }
+                        side="bottom"
+                    >
+                        <span>🍴 {project.forks}</span>
+                    </SimpleTooltip>
+                </div>
+            </Link>
+        </motion.div>
+    </SimpleTooltip>
+);
+
 export default ProjectsSection;

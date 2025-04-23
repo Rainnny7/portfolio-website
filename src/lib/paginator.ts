@@ -1,4 +1,4 @@
-import { PageMetadata } from "../types/page-metadata";
+import { PageMetadata } from "~/types/page-metadata";
 
 type FetchItemsFunction<T> = (fetchItems: FetchItems) => Promise<T[]>;
 

@@ -1,6 +1,7 @@
 export type GithubProject = {
     id: number;
     name: string;
+    nameWithOwner: string;
     description: string | null;
     html_url: string;
     stargazers_count: number;

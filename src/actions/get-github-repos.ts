@@ -46,6 +46,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
         const pinnedRepos = response.data.user.pinnedItems.nodes.map(
             (repo: GithubProject) => ({
                 ...repo,
+                name: repo.nameWithOwner,
                 language: repo.language ? { name: repo.language.name } : null,
                 isPinned: true,
             })
@@ -62,6 +63,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                     )
                     .map((repo: GithubProject) => ({
                         ...repo,
+                        name: repo.nameWithOwner,
                         language: repo.language
                             ? { name: repo.language.name }
                             : null,
@@ -91,6 +93,7 @@ const graphQlQuery = `
                         ... on Repository {
                             id
                             name
+                            nameWithOwner
                             description
                             html_url: url
                             stargazers_count: stargazerCount
@@ -108,6 +111,7 @@ const graphQlQuery = `
                     nodes {
                         id
                         name
+                        nameWithOwner
                         description
                         html_url: url
                         stargazers_count: stargazerCount

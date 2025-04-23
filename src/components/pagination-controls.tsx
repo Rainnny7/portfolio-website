@@ -46,7 +46,7 @@ const PaginationControls = ({
     const pageNumber: number = page?.metadata.page ?? 1;
     const maxPageNumber: number = page?.metadata.totalPages ?? 1;
     return (
-        <div className="w-full flex flex-col-reverse lg:flex-row justify-between gap-3 items-center">
+        <div className="w-full flex flex-col-reverse md:flex-row justify-between gap-3 items-center">
             {/* Left - Total Records */}
             <div className="flex gap-2 items-center text-sm text-muted-foreground">
                 Showing rows {numberWithCommas(page?.metadata.start ?? 0)} -{" "}

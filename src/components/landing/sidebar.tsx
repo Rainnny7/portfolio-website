@@ -44,7 +44,7 @@ const Sidebar = (): ReactElement => {
     return (
         <div
             className={cn(
-                "sticky top-0 w-[20rem] h-screen pt-32 pb-7 bg-background/65 z-50",
+                "hidden lg:block sticky top-0 w-[20rem] h-screen pt-32 pb-7 bg-background/65 z-40",
                 "[mask-image:linear-gradient(to_right,black_90%,transparent)]"
             )}
         >

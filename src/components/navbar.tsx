@@ -54,20 +54,21 @@ const links: NavbarLink[] = [
 ];
 
 const Navbar = (): ReactElement => {
-    const [activeSection, setActiveSection] = useState<string>("home");
+    const [activeSection, setActiveSection] = useState<string>("about");
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries: IntersectionObserverEntry[]) => {
                 entries.forEach((entry: IntersectionObserverEntry) => {
                     if (entry.isIntersecting) {
+                        console.log(entry.target.id);
                         setActiveSection(entry.target.id);
                     }
                 });
             },
             {
-                rootMargin: "-10% 0px -10% 0px",
-                threshold: 0,
+                rootMargin: "-40% 0px -40% 0px",
+                threshold: 0.14,
             }
         );
 
