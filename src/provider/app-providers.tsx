@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 import { TooltipProvider } from "~/components/ui/tooltip";
 
 const AppProviders = ({ children }: { children: ReactNode }) => (
-    <TooltipProvider>
+    <TooltipProvider delayDuration={100}>
         <ViewTransitions>{children}</ViewTransitions>
     </TooltipProvider>
 );

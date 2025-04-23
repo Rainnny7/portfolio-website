@@ -1,2 +1,2 @@
 # portfolio-website
-🌐 My personal portfolio website hosted on [here](https://rainnny.club)
+🌐 My personal portfolio website hosted [here](https://rainnny.club), made with NextJS (:

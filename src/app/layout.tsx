@@ -2,6 +2,8 @@ import { Metadata, Viewport } from "next";
 import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { ReactNode } from "react";
+import Background from "~/components/background";
+import Navbar from "~/components/navbar";
 import { env } from "~/lib/env";
 import { cn } from "~/lib/utils";
 import AppProviders from "~/provider/app-providers";
@@ -13,7 +15,7 @@ export const metadata: Metadata = {
         template: "%s • RainnnyCLUB",
     },
     description:
-        "Pariatur nisi pariatur elit aute anim esse sint incididunt. Aliqua in sit enim aliquip do irure elit excepteur occaecat.",
+        "👋🏼 Hi there, my name is Braydon and I am a self-taught software engineer living in Canada!",
     openGraph: {
         images: [
             {
@@ -51,10 +53,11 @@ const RootLayout = ({
             />
             <AppProviders>
                 <div className="relative min-h-screen">
-                    {/* Background */}
-                    <div className="fixed inset-0 h-screen w-screen bg-neutral-950 bg-[radial-gradient(ellipse_80%_80%_at_80%_-20%,rgba(204,29,29,0.125),rgba(255,255,255,0))] z-[-2]" />
+                    {/* Background - Bottom Right */}
+                    <Background />
 
                     {/* Content */}
+                    <Navbar />
                     <div className="mx-auto max-w-screen-3xl relative">
                         {children}
                     </div>
