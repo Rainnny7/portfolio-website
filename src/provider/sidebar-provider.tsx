@@ -1,6 +1,13 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useState } from "react";
+import {
+    createContext,
+    ReactNode,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
+import { ScreenSize, useIsScreenSize } from "~/hooks/use-mobile";
 
 /**
  * The props for the socket context.
@@ -36,6 +43,13 @@ export const useSidebar = (): SidebarContextProps => {
 
 const SidebarProvider = ({ children }: { children: ReactNode }) => {
     const [open, setOpen] = useState<boolean>(false);
+    const isMobile: boolean = !useIsScreenSize(ScreenSize.Large);
+
+    useEffect(() => {
+        if (isMobile) {
+            setOpen(false);
+        }
+    }, [isMobile]);
 
     return (
         <SidebarContext.Provider value={{ open, setOpen }}>

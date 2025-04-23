@@ -70,7 +70,10 @@ const MobileSidebar = ({
     const { open, setOpen } = useSidebar();
     return (
         <Sheet open={open} onOpenChange={setOpen}>
-            <SheetContent className="w-[20rem] pb-7 bg-background" side="left">
+            <SheetContent
+                className="w-[17.5rem] pb-7 bg-background"
+                side="left"
+            >
                 <SheetHeader>
                     <SheetTitle />
                 </SheetHeader>
@@ -85,7 +88,7 @@ const SidebarContent = ({
 }: {
     discordUser: DiscordUser | undefined;
 }): ReactElement => (
-    <div className="h-full -ml-7 flex flex-col gap-4 justify-between items-center">
+    <div className="h-full lg:-ml-7 flex flex-col gap-4 justify-between items-center">
         <Introduction discordUser={discordUser} />
         <SpotifyStatus discordUser={discordUser} />
     </div>
@@ -208,7 +211,7 @@ const SpotifyStatus = ({
 
     return (
         <motion.div
-            className="w-[calc(100%-5rem)] px-2 py-1.5 bg-muted/15 border border-border rounded-lg"
+            className="w-[calc(100%-2rem)] lg:w-[calc(100%-5rem)] px-2 py-1.5 bg-muted/15 border border-border rounded-lg"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
