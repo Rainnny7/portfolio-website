@@ -5,11 +5,12 @@ import { cn } from "~/lib/utils";
 
 const RoundedCursor = (): ReactElement | undefined => {
     const ref = useRef<HTMLDivElement | null>(null);
-    const [visible, setVisible] = useState<boolean>(false);
+    const [visible, setVisible] = useState<boolean>(true);
     const [hasMouse, setHasMouse] = useState<boolean>(false);
     const [clickable, setClickable] = useState<boolean>(false);
     const [dragging, setDragging] = useState<boolean>(false);
     const lastYRef = useRef<number>(0);
+    const hasMovedRef = useRef<boolean>(false);
 
     useEffect(() => {
         // Check if device has mouse capabilities
@@ -28,8 +29,12 @@ const RoundedCursor = (): ReactElement | undefined => {
         mediaQuery.addListener(checkForMouse);
 
         if (!hasMouse) return;
+
         const handleMouseMove = (event: MouseEvent) => {
-            if (!visible) setVisible(true);
+            if (!hasMovedRef.current) {
+                hasMovedRef.current = true;
+                setVisible(true);
+            }
 
             // Use transform for smooth movement
             if (ref.current) {
@@ -103,6 +108,17 @@ const RoundedCursor = (): ReactElement | undefined => {
             window.removeEventListener("mouseleave", handleMouseLeave);
         };
     }, [visible, hasMouse, dragging, clickable]);
+
+    useEffect(() => {
+        // Set initial position
+        if (ref.current) {
+            ref.current.style.transform = `translate3d(${
+                window.innerWidth / 2
+            }px, ${
+                window.innerHeight / 2
+            }px, 0) translate(-50%, -50%) scale(${1})`;
+        }
+    }, [visible, hasMouse]);
 
     if (!hasMouse) return undefined;
 
