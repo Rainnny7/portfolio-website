@@ -3,12 +3,19 @@
 import request from "~/lib/request";
 import { GithubProject } from "~/types/github-project";
 
+export type GithubProjectResponse = {
+    projects: GithubProject[];
+    totalProjects: number;
+    responseTime: number;
+};
+
 /**
  * Get all repositories from the GitHub API.
  *
  * @returns the github projects
  */
-export const getRepositories = async (): Promise<GithubProject[]> => {
+export const getRepositories = async (): Promise<GithubProjectResponse> => {
+    const before: number = performance.now();
     try {
         // Get pinned and regular repositories using the GitHub GraphQL API
         const response = await request.post<{
@@ -28,7 +35,11 @@ export const getRepositories = async (): Promise<GithubProject[]> => {
         // Invalid response from GitHub
         if (!response?.data?.user) {
             console.error("Invalid GitHub API response:", response);
-            return [];
+            return {
+                projects: [],
+                totalProjects: 0,
+                responseTime: performance.now() - before,
+            };
         }
 
         // Combine pinned and regular repositories, ensuring pinned ones come first
@@ -40,25 +51,35 @@ export const getRepositories = async (): Promise<GithubProject[]> => {
             })
         );
 
-        return [
-            ...pinnedRepos,
-            ...response.data.user.repositories.nodes
-                .filter(
-                    (repo: GithubProject) =>
-                        !repo.archived &&
-                        !pinnedRepos.some((pinned) => pinned.id === repo.id)
-                )
-                .map((repo: GithubProject) => ({
-                    ...repo,
-                    language: repo.language
-                        ? { name: repo.language.name }
-                        : null,
-                    isPinned: false,
-                })),
-        ];
+        return {
+            projects: [
+                ...pinnedRepos,
+                ...response.data.user.repositories.nodes
+                    .filter(
+                        (repo: GithubProject) =>
+                            !repo.archived &&
+                            !pinnedRepos.some((pinned) => pinned.id === repo.id)
+                    )
+                    .map((repo: GithubProject) => ({
+                        ...repo,
+                        language: repo.language
+                            ? { name: repo.language.name }
+                            : null,
+                        isPinned: false,
+                    })),
+            ],
+            totalProjects:
+                pinnedRepos.length +
+                response.data.user.repositories.nodes.length,
+            responseTime: performance.now() - before,
+        };
     } catch (error) {
         console.error("Error fetching GitHub repositories:", error);
-        return [];
+        return {
+            projects: [],
+            totalProjects: 0,
+            responseTime: performance.now() - before,
+        };
     }
 };
 

@@ -20,7 +20,7 @@ const AboutSection = (): ReactElement => (
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
-                <Briefcase className="size-4 text-red-500" />
+                <Briefcase className="size-4 text-primary" />
                 Looking to hire me? Let&apos;s talk!
                 <AnimatedRightChevron />
             </motion.div>
