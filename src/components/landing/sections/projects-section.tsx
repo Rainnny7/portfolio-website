@@ -173,7 +173,7 @@ const Project = ({
                                 side="bottom"
                             >
                                 <Badge
-                                    className="absolute top-2 left-2 z-10"
+                                    className="absolute top-2 left-2 bg-muted/70 backdrop-blur-sm border border-border/85 z-10"
                                     variant="secondary"
                                 >
                                     <Sparkle className="size-4 text-primary font-bold" />
@@ -188,6 +188,7 @@ const Project = ({
                                 className="p-1 object-cover rounded-t-lg"
                                 src={project.socialImageUrl}
                                 alt={project.name}
+                                priority
                                 fill
                                 draggable={false}
                             />
