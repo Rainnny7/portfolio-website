@@ -48,7 +48,7 @@ const PaginationControls = ({
     return (
         <div className="w-full flex flex-col-reverse md:flex-row justify-between gap-3 items-center">
             {/* Left - Total Records */}
-            <div className="flex gap-2 items-center text-sm text-muted-foreground">
+            <div className="flex gap-2 items-center text-sm font-light text-muted-foreground">
                 Showing items {numberWithCommas(page?.metadata.start ?? 0)} -{" "}
                 {numberWithCommas(page?.metadata.end ?? 0)} of{" "}
                 {numberWithCommas(page?.metadata.totalItems ?? 0)} (Took{" "}
@@ -105,7 +105,7 @@ const PaginationControls = ({
                                     )}
 
                                     <PaginationLink
-                                        className="px-2"
+                                        className="px-2 font-light"
                                         size="default"
                                         isActive={false}
                                     >

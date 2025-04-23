@@ -2,10 +2,9 @@
 
 import { Server } from "lucide-react";
 import { motion } from "motion/react";
-import { Separator } from "~/components/ui/separator";
 
 const HomelabSection = () => (
-    <section id="homelab" className="py-40 flex flex-col gap-4">
+    <section id="homelab" className="pt-40 flex flex-col gap-5">
         {/* Header */}
         <div className="flex flex-col gap-2">
             <motion.h2
@@ -13,7 +12,7 @@ const HomelabSection = () => (
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
             >
                 <Server className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
                 My Homelab
@@ -23,7 +22,7 @@ const HomelabSection = () => (
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
             >
                 This is my homelab so far, it hosts all my services, including
                 this website! I work on it in my spare time when I can (:
@@ -31,13 +30,12 @@ const HomelabSection = () => (
         </div>
 
         {/* Content */}
-        <Separator className="my-2" />
         <motion.p
             className="text-lg text-muted-foreground font-light"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
         >
             This section isn&apos;t finished yet.
         </motion.p>

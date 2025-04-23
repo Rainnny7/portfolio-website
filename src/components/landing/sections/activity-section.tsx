@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 import GithubCommitGraph from "~/components/landing/github-commit-graph";
 
 const ActivitySection = () => (
-    <section id="activity" className="py-40 flex flex-col gap-7">
+    <section id="activity" className="pt-40 flex flex-col gap-5">
         {/* Header */}
         <div className="flex flex-col gap-2">
             <motion.h2
@@ -13,7 +13,7 @@ const ActivitySection = () => (
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: 1.1 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
             >
                 <Activity className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
                 My Activity
@@ -23,7 +23,7 @@ const ActivitySection = () => (
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: 1.2 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
             >
                 This is a little graph of what I&apos;ve been up to on GitHub
                 this year.
@@ -35,7 +35,7 @@ const ActivitySection = () => (
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 1.3 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
         >
             <GithubCommitGraph />
         </motion.div>

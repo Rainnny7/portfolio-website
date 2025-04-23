@@ -34,8 +34,8 @@ const ProjectsSection = (): ReactElement => {
         const getPagedProjects = async () => {
             const pagedProjects = await new Paginator<GithubProject>()
                 .setItems(githubResponse.projects)
-                .setItemsPerPage(12)
-                .setTotalItems(githubResponse.totalProjects)
+                .setItemsPerPage(9)
+                .setTotalItems(githubResponse.projects.length)
                 .getPage(page);
             setPagedProjects(pagedProjects);
         };
@@ -106,7 +106,11 @@ const ProjectsSection = (): ReactElement => {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{
                             duration: 0.5,
-                            delay: 1,
+                            delay:
+                                1 +
+                                (pagedProjects?.metadata.end ??
+                                    0 - (pagedProjects?.metadata.start ?? 0)) *
+                                    0.1,
                         }}
                     >
                         <PaginationControls
