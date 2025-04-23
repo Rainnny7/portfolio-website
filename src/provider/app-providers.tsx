@@ -11,7 +11,9 @@ const queryClient = new QueryClient();
 const AppProviders = ({ children }: { children: ReactNode }) => {
     // When loading the site, start from the top
     useEffect(() => {
-        window.scrollTo(0, 0);
+        if (!window.location.hash) {
+            window.scrollTo(0, 0);
+        }
     }, []);
 
     return (
