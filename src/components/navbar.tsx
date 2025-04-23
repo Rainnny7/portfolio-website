@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
+import { usePathname } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
@@ -65,6 +66,7 @@ const links: NavbarLink[] = [
 ];
 
 const Navbar = (): ReactElement => {
+    const path: string = usePathname();
     const { open, setOpen } = useSidebar();
     const [activeSection, setActiveSection] = useState<string>("about");
 
@@ -126,6 +128,7 @@ const Navbar = (): ReactElement => {
             {/* Links */}
             {links.map((link: NavbarLink) => {
                 const active: boolean =
+                    path === "/" &&
                     activeSection === link.sectionId &&
                     link.sectionId !== "home";
                 return (
