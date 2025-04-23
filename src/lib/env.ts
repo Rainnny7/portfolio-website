@@ -7,6 +7,9 @@ export const env = createEnv({
         NODE_ENV: z.enum(["development", "test", "production"]),
         LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]),
 
+        // GitHub
+        GITHUB_TOKEN: z.string(),
+
         // Analytics
         ANALYTICS_HOST: z.string(),
         ANALYTICS_ID: z.string(),
@@ -22,6 +25,9 @@ export const env = createEnv({
         NEXT_PUBLIC_BASE_URL: process.env.NEXT_PUBLIC_BASE_URL,
         NODE_ENV: process.env.NODE_ENV,
         LOG_LEVEL: process.env.LOG_LEVEL,
+
+        // GitHub
+        GITHUB_TOKEN: process.env.GITHUB_TOKEN,
 
         // Analytics
         ANALYTICS_HOST: process.env.ANALYTICS_HOST,

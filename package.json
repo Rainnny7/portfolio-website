@@ -15,6 +15,7 @@
         "prettier": "bunx prettier -w --config ./.prettierrc ."
     },
     "dependencies": {
+        "@octokit/rest": "^21.1.1",
         "@radix-ui/react-dialog": "^1.1.11",
         "@radix-ui/react-popover": "^1.1.11",
         "@radix-ui/react-separator": "^1.1.4",

@@ -1,6 +1,6 @@
 "use server";
 
-import request from "~/lib/request";
+import { octokit } from "~/lib/github";
 import { GithubProject } from "~/types/github-project";
 
 export type GithubProjectResponse = {
@@ -18,22 +18,15 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
     const before: number = performance.now();
     try {
         // Get pinned and regular repositories using the GitHub GraphQL API
-        const response = await request.post<{
-            data: {
-                user: {
-                    pinnedItems: { nodes: GithubProject[] };
-                    repositories: { nodes: GithubProject[] };
-                };
+        const response = await octokit.graphql<{
+            user: {
+                pinnedItems: { nodes: GithubProject[] };
+                repositories: { nodes: GithubProject[] };
             };
-        }>("https://api.github.com/graphql", {
-            data: { query: graphQlQuery },
-            headers: {
-                Authorization: `Bearer ${process.env.GITHUB_TOKEN}`,
-            },
-        });
+        }>(graphQlQuery);
 
         // Invalid response from GitHub
-        if (!response?.data?.user) {
+        if (!response?.user) {
             console.error("Invalid GitHub API response:", response);
             return {
                 projects: [],
@@ -43,7 +36,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
         }
 
         // Combine pinned and regular repositories, ensuring pinned ones come first
-        const pinnedRepos = response.data.user.pinnedItems.nodes.map(
+        const pinnedRepos = response.user.pinnedItems.nodes.map(
             (repo: GithubProject) => ({
                 ...repo,
                 name: repo.nameWithOwner,
@@ -55,7 +48,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
         return {
             projects: [
                 ...pinnedRepos,
-                ...response.data.user.repositories.nodes
+                ...response.user.repositories.nodes
                     .filter(
                         (repo: GithubProject) =>
                             !repo.archived &&
@@ -71,8 +64,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                     })),
             ],
             totalProjects:
-                pinnedRepos.length +
-                response.data.user.repositories.nodes.length,
+                pinnedRepos.length + response.user.repositories.nodes.length,
             responseTime: performance.now() - before,
         };
     } catch (error) {
@@ -85,7 +77,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
     }
 };
 
-const graphQlQuery = `
+const graphQlQuery: string = `
         query {
             user(login: "Rainnny7") {
                 pinnedItems(first: 6, types: REPOSITORY) {
