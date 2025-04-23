@@ -43,7 +43,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                 language: repo.language ? { name: repo.language.name } : null,
                 isPinned: true,
                 socialImageUrl:
-                    repo.socialImageUrl ||
+                    // repo.socialImageUrl ||
                     // `https://opengraph.githubassets.com/${repo.nameWithOwner}`,
                     `https://gh-social.rainnny.club/${repo.nameWithOwner}?stats=true`,
             })
@@ -66,7 +66,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                             : null,
                         isPinned: false,
                         socialImageUrl:
-                            repo.socialImageUrl ||
+                            // repo.socialImageUrl ||
                             // `https://opengraph.githubassets.com/${repo.nameWithOwner}`,
                             `https://gh-social.rainnny.club/${repo.nameWithOwner}?stats=true`,
                     })),
