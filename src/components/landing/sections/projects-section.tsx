@@ -42,17 +42,27 @@ const ProjectsSection = (): ReactElement => {
     }, [page, githubResponse]);
 
     return (
-        <section id="projects" className="py-40 flex flex-col gap-4">
-            <motion.h2
-                id="projects"
-                className="text-4xl font-bold flex gap-4 items-center"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 1.5 }}
-            >
-                <Briefcase className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
-                My Projects
-            </motion.h2>
+        <section id="projects" className="pt-40 flex flex-col gap-4">
+            {/* Header */}
+            <div className="flex flex-col gap-2">
+                <motion.h2
+                    className="text-4xl font-bold flex gap-4 items-center"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 1.5 }}
+                >
+                    <Briefcase className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
+                    My Projects
+                </motion.h2>
+                <motion.p
+                    className="max-w-lg text-lg text-muted-foreground font-light"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 1.6 }}
+                >
+                    Here are some of the projects I&apos;ve worked on.
+                </motion.p>
+            </div>
 
             {/* Projects */}
             {isLoading ? (

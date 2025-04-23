@@ -14,7 +14,7 @@ const AboutSection = (): ReactElement => (
     <section id="about" className="flex flex-col gap-4">
         {/* Hire Me */}
         <Link
-            className="w-fit "
+            className="w-fit"
             href={appConfig.socials.email.href}
             draggable={false}
         >
