@@ -79,25 +79,24 @@ const ProjectsSection = (): ReactElement => {
                     {Array.from({ length: 5 }).map((_, index: number) => (
                         <Skeleton
                             key={index}
-                            className="w-full max-w-[30rem] h-[9.5rem]"
+                            className="w-full max-w-[23.5rem] h-[9.5rem]"
                         />
                     ))}
                 </motion.div>
             ) : (
                 // Projects
                 <div className="flex flex-col gap-4">
-                    <div className="flex flex-wrap gap-4 items-center">
+                    <ul className="flex flex-wrap gap-4 items-center">
                         {pagedProjects?.items?.map(
                             (project: GithubProject, index: number) => (
                                 <Project
                                     key={project.id}
                                     project={project}
                                     index={index}
-                                    page={page}
                                 />
                             )
                         )}
-                    </div>
+                    </ul>
 
                     {/* Pagination Controls */}
                     <motion.div
@@ -125,11 +124,9 @@ const ProjectsSection = (): ReactElement => {
 const Project = ({
     project,
     index,
-    page,
 }: {
     project: GithubProject;
     index: number;
-    page: number;
 }): ReactElement => (
     <SimpleTooltip
         content={
@@ -139,7 +136,7 @@ const Project = ({
         }
         side="bottom"
     >
-        <motion.div
+        <motion.li
             key={project.id}
             className="w-full md:w-fit"
             initial={{ opacity: 0, y: 20 }}
@@ -221,7 +218,7 @@ const Project = ({
                     </SimpleTooltip>
                 </div>
             </Link>
-        </motion.div>
+        </motion.li>
     </SimpleTooltip>
 );
 
