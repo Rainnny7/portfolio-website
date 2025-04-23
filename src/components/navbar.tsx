@@ -20,7 +20,7 @@ import { cn } from "~/lib/utils";
 import { useSidebar } from "~/provider/sidebar-provider";
 
 type NavbarLink = {
-    name: string;
+    name?: string | undefined;
     icon: LucideIcon;
     tooltip: string;
     href: string;
@@ -29,7 +29,6 @@ type NavbarLink = {
 
 const links: NavbarLink[] = [
     {
-        name: "Home",
         icon: Home,
         tooltip: "Go back home",
         href: "/",
@@ -153,7 +152,10 @@ const Navbar = (): ReactElement => {
                     >
                         <Link
                             className={cn(
-                                "px-2 sm:px-3.5 md:px-5 py-1.5 flex gap-1.5 sm:gap-2.5 items-center hover:bg-zinc-900/55 rounded-xl transition-all transform-gpu",
+                                link.name
+                                    ? "px-2 sm:px-3.5 md:px-5"
+                                    : "px-2 sm:px-2.5",
+                                "py-1.5 flex gap-1.5 sm:gap-2.5 items-center hover:bg-zinc-900/55 rounded-xl transition-all transform-gpu",
                                 active && "bg-zinc-900/55"
                             )}
                             href={link.href}
@@ -161,25 +163,32 @@ const Navbar = (): ReactElement => {
                         >
                             <link.icon className="size-4" />
 
-                            {/* Mobile name (only shows when active) */}
-                            <motion.span
-                                className={cn(!active && "hidden")}
-                                initial={{ opacity: 0, x: -10 }}
-                                animate={{
-                                    opacity: active ? 1 : 0,
-                                    x: active ? 0 : -10,
-                                }}
-                                transition={{ duration: 0.2 }}
-                            >
-                                {link.name}
-                            </motion.span>
+                            {link.name && (
+                                <>
+                                    {/* Mobile name (only shows when active) */}
+                                    <motion.span
+                                        className={cn(!active && "hidden")}
+                                        initial={{ opacity: 0, x: -10 }}
+                                        animate={{
+                                            opacity: active ? 1 : 0,
+                                            x: active ? 0 : -10,
+                                        }}
+                                        transition={{ duration: 0.2 }}
+                                    >
+                                        {link.name}
+                                    </motion.span>
 
-                            {/* Desktop name (always visible) */}
-                            <span
-                                className={cn("hidden", !active && "sm:block")}
-                            >
-                                {link.name}
-                            </span>
+                                    {/* Desktop name (always visible) */}
+                                    <span
+                                        className={cn(
+                                            "hidden",
+                                            !active && "sm:block"
+                                        )}
+                                    >
+                                        {link.name}
+                                    </span>
+                                </>
+                            )}
                         </Link>
                     </SimpleTooltip>
                 );
