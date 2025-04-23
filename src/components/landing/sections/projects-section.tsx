@@ -150,77 +150,84 @@ const Project = ({
         >
             <Link href={project.html_url} target="_blank" draggable={false}>
                 <MagicCard
-                    className="p-4 w-full md:w-[24.5rem] lg:w-[18.5rem] xl:w-[22.5rem] 2xl:w-[23.5rem] min-h-[14rem] lg:min-h-[12.5rem] 2xl:min-h-[11rem] flex flex-col gap-2 rounded-2xl"
+                    className="p-4 w-full md:w-[24.5rem] lg:w-[18.5rem] xl:w-[22.5rem] 2xl:w-[23.5rem] h-[14rem] lg:h-[12.5rem] 2xl:h-[11rem] rounded-2xl"
                     gradientColor="#1C1C1C"
                     gradientFrom="#AA0000"
                     gradientTo="#FE5454"
                 >
-                    {/* Repository Name & Pin Badge */}
-                    <div className="flex justify-between gap-1.5 items-center">
-                        <h3 className="text-xl font-semibold">
-                            {project.name}
-                        </h3>
-                        {project.isPinned && (
-                            <SimpleTooltip
-                                content="This repository is pinned!"
-                                side="bottom"
-                            >
-                                <Pin className="size-4 text-red-500" />
-                            </SimpleTooltip>
-                        )}
-                    </div>
+                    <div className="h-full flex flex-col">
+                        {/* Repository Name & Pin Badge */}
+                        <div className="flex justify-between gap-1.5 items-center">
+                            <h3 className="text-xl font-semibold">
+                                {project.name}
+                            </h3>
+                            {project.isPinned && (
+                                <SimpleTooltip
+                                    content="This repository is pinned!"
+                                    side="bottom"
+                                >
+                                    <Pin className="size-4 text-red-500" />
+                                </SimpleTooltip>
+                            )}
+                        </div>
 
-                    {/* Repository Description */}
-                    <p className="mt-1 line-clamp-2 text-muted-foreground font-light">
-                        {truncateText(
-                            project.description ?? "No description );",
-                            124
-                        )}
-                    </p>
+                        {/* Repository Description */}
+                        <p className="mt-2 line-clamp-2 text-muted-foreground font-light">
+                            {truncateText(
+                                project.description ?? "No description );",
+                                124
+                            )}
+                        </p>
 
-                    {/* Repository Language, Stars, & Forks */}
-                    <div className="mt-auto flex gap-4 text-sm text-muted-foreground">
-                        {/* Language */}
-                        {project.language && (
+                        {/* Spacer */}
+                        <div className="flex-1" />
+
+                        {/* Repository Language, Stars, & Forks */}
+                        <div className="flex gap-4 text-sm text-muted-foreground pt-4">
+                            {/* Language */}
+                            {project.language && (
+                                <SimpleTooltip
+                                    content={
+                                        <span>
+                                            This project is made with{" "}
+                                            <b>{project.language.name}</b>
+                                        </span>
+                                    }
+                                    side="bottom"
+                                >
+                                    <span>{project.language.name}</span>
+                                </SimpleTooltip>
+                            )}
+
+                            {/* Stars */}
                             <SimpleTooltip
                                 content={
                                     <span>
-                                        This project is made with{" "}
-                                        <b>{project.language.name}</b>
+                                        This project has{" "}
+                                        {project.stargazers_count} star
+                                        {project.stargazers_count === 1
+                                            ? ""
+                                            : "s"}
                                     </span>
                                 }
                                 side="bottom"
                             >
-                                <span>{project.language.name}</span>
+                                <span>⭐ {project.stargazers_count}</span>
                             </SimpleTooltip>
-                        )}
 
-                        {/* Stars */}
-                        <SimpleTooltip
-                            content={
-                                <span>
-                                    This project has {project.stargazers_count}{" "}
-                                    star
-                                    {project.stargazers_count === 1 ? "" : "s"}
-                                </span>
-                            }
-                            side="bottom"
-                        >
-                            <span>⭐ {project.stargazers_count}</span>
-                        </SimpleTooltip>
-
-                        {/* Forks */}
-                        <SimpleTooltip
-                            content={
-                                <span>
-                                    This project has {project.forks} fork
-                                    {project.forks === 1 ? "" : "s"}
-                                </span>
-                            }
-                            side="bottom"
-                        >
-                            <span>🍴 {project.forks}</span>
-                        </SimpleTooltip>
+                            {/* Forks */}
+                            <SimpleTooltip
+                                content={
+                                    <span>
+                                        This project has {project.forks} fork
+                                        {project.forks === 1 ? "" : "s"}
+                                    </span>
+                                }
+                                side="bottom"
+                            >
+                                <span>🍴 {project.forks}</span>
+                            </SimpleTooltip>
+                        </div>
                     </div>
                 </MagicCard>
             </Link>
