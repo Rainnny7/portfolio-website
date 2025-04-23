@@ -8,6 +8,7 @@ import { ReactElement } from "react";
 import { appConfig } from "~/app/config";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
 import SimpleTooltip from "~/components/simple-tooltip";
+import { InfiniteMovingCards } from "~/components/ui/infinite-moving-cards";
 import { type Skill, type SocialConfig } from "~/types/app-config";
 
 const AboutSection = (): ReactElement => (
@@ -79,20 +80,22 @@ const AboutSection = (): ReactElement => (
 
         {/* Skills */}
         <motion.div
-            className="max-w-md flex flex-wrap gap-2"
+            className="max-w-xl flex flex-wrap gap-2"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{
                 duration: 0.5,
-                delay: 0.4,
+                delay: 0.5,
                 staggerChildren: 0.05,
                 delayChildren: 0.1,
             }}
         >
-            {appConfig.skills.map((skill: Skill, index: number) => (
-                <Skill key={skill.name} skill={skill} index={index} />
-            ))}
+            <InfiniteMovingCards>
+                {appConfig.skills.map((skill: Skill, index: number) => (
+                    <Skill key={skill.name} skill={skill} index={index} />
+                ))}
+            </InfiniteMovingCards>
         </motion.div>
     </section>
 );
@@ -110,7 +113,7 @@ const SocialLink = ({
         viewport={{ once: true, margin: "-100px" }}
         transition={{
             duration: 0.5,
-            delay: 0.4 + index * 0.1,
+            delay: 0.3 + index * 0.1,
         }}
     >
         <SimpleTooltip content={social.tooltip} side="bottom">
