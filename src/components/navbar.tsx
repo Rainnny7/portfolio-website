@@ -141,8 +141,23 @@ const Navbar = (): ReactElement => {
                             draggable={false}
                         >
                             <link.icon className="size-4" />
+
+                            {/* Mobile name (only shows when active) */}
+                            <motion.span
+                                className={cn(!active && "xs:hidden")}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{
+                                    opacity: active ? 1 : 0,
+                                    x: active ? 0 : -10,
+                                }}
+                                transition={{ duration: 0.2 }}
+                            >
+                                {link.name}
+                            </motion.span>
+
+                            {/* Desktop name (always visible) */}
                             <span
-                                className={cn(!active && "hidden", "sm:block")}
+                                className={cn("hidden", !active && "sm:block")}
                             >
                                 {link.name}
                             </span>
