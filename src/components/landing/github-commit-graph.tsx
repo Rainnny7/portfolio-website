@@ -116,24 +116,35 @@ export default function GithubCommitGraph() {
                                         >
                                             {day ? (
                                                 <SimpleTooltip
-                                                    content={`${
-                                                        day.count < 1
-                                                            ? "No contributions"
-                                                            : `${
-                                                                  day.count
-                                                              } contribution${
-                                                                  day.count > 1
-                                                                      ? "s"
-                                                                      : ""
-                                                              }`
-                                                    } on ${day.date.toLocaleDateString(
-                                                        "en-US",
-                                                        {
-                                                            month: "long",
-                                                            day: "numeric",
-                                                            year: "numeric",
-                                                        }
-                                                    )}`}
+                                                    content={
+                                                        <span>
+                                                            <b>
+                                                                {day.count < 1
+                                                                    ? "No contributions"
+                                                                    : `${
+                                                                          day.count
+                                                                      } contribution${
+                                                                          day.count >
+                                                                          1
+                                                                              ? "s"
+                                                                              : ""
+                                                                      }`}
+                                                            </b>{" "}
+                                                            on{" "}
+                                                            <b>
+                                                                {day.date.toLocaleDateString(
+                                                                    "en-US",
+                                                                    {
+                                                                        weekday:
+                                                                            "long",
+                                                                        month: "long",
+                                                                        day: "numeric",
+                                                                        year: "numeric",
+                                                                    }
+                                                                )}
+                                                            </b>
+                                                        </span>
+                                                    }
                                                 >
                                                     <div>
                                                         <ActivityBox
@@ -202,9 +213,9 @@ const generateCalendarData = (
         | { contributionDays: { contributionCount: number; date: string }[] }[]
         | undefined
 ) => {
-    const currentYear: number = new Date().getFullYear();
-    const startDate: Date = new Date(currentYear, 0, 1);
-    const endDate: Date = new Date(currentYear, 11, 31);
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - 367); // Go back 364 days to get exactly 52 weeks
 
     const monthPositions: { month: string; weekIndex: number }[] = [];
 
@@ -221,9 +232,9 @@ const generateCalendarData = (
         dateString: string;
     })[] = [];
 
-    // Fill in empty cells before the first day of the year
-    const firstDayOfYear: number = startDate.getDay();
-    for (let i = 0; i < firstDayOfYear; i++) {
+    // Fill in empty cells before the first day
+    const firstDayOfWeek: number = startDate.getDay();
+    for (let i = 0; i < firstDayOfWeek; i++) {
         currentWeek.push(null);
     }
 
@@ -238,11 +249,12 @@ const generateCalendarData = (
         });
     });
 
-    // Loop through all days in the year
-    while (currentDate <= endDate) {
+    // Loop through all days
+    while (currentDate <= today) {
         const month = currentDate.getMonth();
         const day = currentDate.getDate();
-        const dateString = `${currentYear}-${String(month + 1).padStart(
+        const year = currentDate.getFullYear();
+        const dateString = `${year}-${String(month + 1).padStart(
             2,
             "0"
         )}-${String(day).padStart(2, "0")}`;
@@ -286,9 +298,9 @@ const generateCalendarData = (
 };
 
 const getColor = (count: number) => {
-    if (count === 0) return "bg-zinc-200/10";
-    if (count <= 2) return "bg-[#0E4429]";
-    if (count <= 5) return "bg-[#006D32]";
-    if (count <= 8) return "bg-[#26A641]";
-    return "bg-[#39D353]";
+    if (count === 0) return "bg-zinc-300/10";
+    if (count <= 3) return "bg-[#0e4429]";
+    if (count <= 6) return "bg-[#006d32]";
+    if (count <= 9) return "bg-[#26a641]";
+    return "bg-[#39d353]";
 };
