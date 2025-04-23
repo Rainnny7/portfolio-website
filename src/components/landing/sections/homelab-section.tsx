@@ -2,6 +2,7 @@
 
 import { Server } from "lucide-react";
 import { motion } from "motion/react";
+import { Separator } from "~/components/ui/separator";
 
 const HomelabSection = () => (
     <section id="homelab" className="pt-40 flex flex-col gap-5">
@@ -30,15 +31,47 @@ const HomelabSection = () => (
         </div>
 
         {/* Content */}
-        <motion.p
-            className="text-lg text-muted-foreground font-light"
+        <motion.div
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            transition={{ duration: 0.5, delay: 0.9 }}
         >
-            This section isn&apos;t finished yet.
-        </motion.p>
+            <Separator className="max-w-2xl" />
+        </motion.div>
+        <motion.ul
+            className="text-white/85 font-light"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 1 }}
+        >
+            <li>
+                <b>Server Rack:</b> 22U, 32&quot; Depth
+            </li>
+            <li>
+                <b>Router:</b> UDM Pro
+            </li>
+            <li>
+                <b>UPS:</b> 1350VA
+            </li>
+            <li className="my-2.5" />
+            <ul>
+                <b>Proxmox Node-01:</b>
+                <li>
+                    - <b>Motherboard:</b> Prime B550-PLUS
+                </li>
+                <li>
+                    - <b>CPU:</b> Ryzen 5 5600G
+                </li>
+                <li>
+                    - <b>RAM:</b> 38GB of DDR4 @ 3200Mhz
+                </li>
+                <li>
+                    - <b>Storage:</b> 8TB (x2 4TB, x1 4TB Parity) Unraid Array
+                </li>
+            </ul>
+        </motion.ul>
     </section>
 );
 export default HomelabSection;

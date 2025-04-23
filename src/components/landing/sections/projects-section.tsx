@@ -107,7 +107,7 @@ const ProjectsSection = (): ReactElement => {
                         transition={{
                             duration: 0.5,
                             delay:
-                                1 +
+                                1.2 +
                                 (pagedProjects?.metadata.end ??
                                     0 - (pagedProjects?.metadata.start ?? 0)) *
                                     0.1,
