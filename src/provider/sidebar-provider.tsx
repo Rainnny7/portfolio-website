@@ -10,7 +10,7 @@ import {
 import { ScreenSize, useIsScreenSize } from "~/hooks/use-mobile";
 
 /**
- * The props for the socket context.
+ * The props for the sidebar context.
  */
 type SidebarContextProps = {
     /**

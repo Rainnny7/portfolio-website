@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ViewTransitions } from "next-view-transitions";
 import { ReactNode, useEffect } from "react";
 import { TooltipProvider } from "~/components/ui/tooltip";
+import KittyProvider from "~/provider/kitty-provider";
 import SidebarProvider from "~/provider/sidebar-provider";
 
 const queryClient = new QueryClient();
@@ -20,7 +21,9 @@ const AppProviders = ({ children }: { children: ReactNode }) => {
         <QueryClientProvider client={queryClient}>
             <TooltipProvider delayDuration={100}>
                 <ViewTransitions>
-                    <SidebarProvider>{children}</SidebarProvider>
+                    <SidebarProvider>
+                        <KittyProvider>{children}</KittyProvider>
+                    </SidebarProvider>
                 </ViewTransitions>
             </TooltipProvider>
         </QueryClientProvider>

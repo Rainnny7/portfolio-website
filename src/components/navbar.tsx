@@ -3,6 +3,7 @@
 import {
     Activity,
     Briefcase,
+    Cat,
     Home,
     Image,
     LucideIcon,
@@ -18,6 +19,7 @@ import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
 import { cn } from "~/lib/utils";
+import { useKitty } from "~/provider/kitty-provider";
 import { useSidebar } from "~/provider/sidebar-provider";
 
 type NavbarLink = {
@@ -25,7 +27,7 @@ type NavbarLink = {
     icon: LucideIcon;
     tooltip: string;
     href: string;
-    sectionId: string;
+    sectionId?: string | undefined;
 };
 
 const links: NavbarLink[] = [
@@ -33,7 +35,6 @@ const links: NavbarLink[] = [
         icon: Home,
         tooltip: "Go back home",
         href: "/",
-        sectionId: "home",
     },
     {
         name: "About",
@@ -89,8 +90,10 @@ const Navbar = (): ReactElement => {
     useEffect(() => {
         const handleScroll = () => {
             const sections = links
-                .filter((link: NavbarLink) => link.sectionId !== "home")
-                .map((link) => document.getElementById(link.sectionId))
+                .filter((link: NavbarLink) => link.sectionId)
+                .map((link: NavbarLink) =>
+                    document.getElementById(link.sectionId!)
+                )
                 .filter(Boolean) as HTMLElement[];
             const scrollPosition = window.scrollY + window.innerHeight / 2;
 
@@ -135,7 +138,7 @@ const Navbar = (): ReactElement => {
             <div className="lg:hidden flex items-center gap-1">
                 <SimpleTooltip content="Open sidebar" side="bottom">
                     <Button
-                        className="hover:bg-zinc-900/55 rounded-xl"
+                        className="size-8 hover:bg-zinc-900/55 rounded-xl"
                         variant="ghost"
                         size="icon"
                         onClick={() => setOpen(!open)}
@@ -166,9 +169,9 @@ const Navbar = (): ReactElement => {
                         <Link
                             className={cn(
                                 link.name
-                                    ? "px-2 sm:px-3.5 md:px-5"
-                                    : "px-2 sm:px-2.5",
-                                "py-1.5 flex gap-1.5 sm:gap-2.5 items-center hover:bg-zinc-900/55 font-light rounded-xl transition-all transform-gpu",
+                                    ? "px-2 sm:px-2.5 md:px-3 py-1.5"
+                                    : "px-2 sm:px-2.5 py-2",
+                                "flex gap-1.5 sm:gap-2.5 items-center hover:bg-zinc-900/55 font-light rounded-xl transition-all transform-gpu",
                                 active && "bg-zinc-900/55 text-primary"
                             )}
                             href={link.href}
@@ -206,8 +209,32 @@ const Navbar = (): ReactElement => {
                     </SimpleTooltip>
                 );
             })}
+
+            {/* Toggle the kitty! */}
+            <SimpleTooltip content="Toggle the kitty" side="bottom">
+                <div>
+                    <KittyToggle />
+                </div>
+            </SimpleTooltip>
         </motion.nav>
     );
 };
 
+const KittyToggle = (): ReactElement => {
+    const { showKitty, setShowKitty } = useKitty();
+    return (
+        <Button
+            className={cn(
+                "size-8 rounded-xl transition-all transform-gpu",
+                showKitty &&
+                    "bg-zinc-900/55 text-primary/85 hover:bg-zinc-900/55 hover:text-primary"
+            )}
+            variant="ghost"
+            size="icon"
+            onClick={() => setShowKitty(!showKitty)}
+        >
+            <Cat className="size-4" />
+        </Button>
+    );
+};
 export default Navbar;

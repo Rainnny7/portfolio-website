@@ -4,7 +4,7 @@ import { Server } from "lucide-react";
 import { motion } from "motion/react";
 
 const MediaSection = () => (
-    <section id="media" className="pt-40 flex flex-col gap-5">
+    <section id="media" className="py-40 flex flex-col gap-5">
         {/* Header */}
         <div className="flex flex-col gap-2">
             <motion.h2

@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import Background from "~/components/background";
 import HeroPattern from "~/components/hero-pattern";
 import Navbar from "~/components/navbar";
+import OnekoKitty from "~/components/oneko-kitty";
 import RoundedCursor from "~/components/rounded-cursor";
 import { env } from "~/lib/env";
 import { cn } from "~/lib/utils";
@@ -58,6 +59,9 @@ const RootLayout = ({
                     {/* Backgrounds */}
                     <HeroPattern />
                     <Background />
+
+                    {/* Kitty! */}
+                    <OnekoKitty />
 
                     {/* Content */}
                     <Navbar />
