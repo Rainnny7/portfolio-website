@@ -78,33 +78,38 @@ const Navbar = (): ReactElement => {
     const [activeSection, setActiveSection] = useState<string>("about");
     const [hasScrolled, setHasScrolled] = useState<boolean>(false);
 
-    // Checking for the observered section
+    // Set initial active section
     useEffect(() => {
-        const observer = new IntersectionObserver(
-            (entries: IntersectionObserverEntry[]) => {
-                entries.forEach((entry: IntersectionObserverEntry) => {
-                    if (entry.isIntersecting) {
-                        console.log(entry.target.id);
-                        setActiveSection(entry.target.id);
-                    }
-                });
-            },
-            {
-                rootMargin: "-40% 0px -40% 0px",
-                threshold: 0.14,
-            }
-        );
+        if (path === "/") {
+            setActiveSection("about");
+        }
+    }, [path]);
 
-        // Observe all sections
-        links
-            .filter((link: NavbarLink) => link.sectionId !== "home")
-            .forEach((link: NavbarLink) => {
-                const section: HTMLElement | null = document.getElementById(
-                    link.sectionId
-                );
-                if (section) observer.observe(section);
-            });
-        return () => observer.disconnect();
+    // Handle scroll and section visibility
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = links
+                .filter((link: NavbarLink) => link.sectionId !== "home")
+                .map((link) => document.getElementById(link.sectionId))
+                .filter(Boolean) as HTMLElement[];
+            const scrollPosition = window.scrollY + window.innerHeight / 2;
+
+            for (const section of sections) {
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                if (
+                    scrollPosition >= sectionTop &&
+                    scrollPosition <= sectionBottom
+                ) {
+                    setActiveSection(section.id);
+                    break;
+                }
+            }
+        };
+        handleScroll();
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
     // Checking if the user has scrolled
