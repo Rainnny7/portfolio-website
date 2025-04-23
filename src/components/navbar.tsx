@@ -158,8 +158,8 @@ const Navbar = (): ReactElement => {
             {links.map((link: NavbarLink, index: number) => {
                 const active: boolean =
                     path === "/" &&
-                    activeSection === link.sectionId &&
-                    link.sectionId !== "home";
+                    link.sectionId !== undefined &&
+                    activeSection === link.sectionId;
                 return (
                     <SimpleTooltip
                         key={index}
