@@ -13,4 +13,5 @@ export type GithubProject = {
     created_at: string;
     updated_at: string;
     isPinned: boolean;
+    socialImageUrl: string;
 };

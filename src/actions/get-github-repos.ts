@@ -42,6 +42,10 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                 name: repo.nameWithOwner,
                 language: repo.language ? { name: repo.language.name } : null,
                 isPinned: true,
+                socialImageUrl:
+                    repo.socialImageUrl ||
+                    // `https://opengraph.githubassets.com/${repo.nameWithOwner}`,
+                    `https://gh-social.rainnny.club/${repo.nameWithOwner}?stats=true`,
             })
         );
 
@@ -61,6 +65,10 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                             ? { name: repo.language.name }
                             : null,
                         isPinned: false,
+                        socialImageUrl:
+                            repo.socialImageUrl ||
+                            // `https://opengraph.githubassets.com/${repo.nameWithOwner}`,
+                            `https://gh-social.rainnny.club/${repo.nameWithOwner}?stats=true`,
                     })),
             ],
             totalProjects:
@@ -96,6 +104,7 @@ const graphQlQuery: string = `
                             archived: isArchived
                             created_at: createdAt
                             updated_at: updatedAt
+                            socialImageUrl: openGraphImageUrl
                         }
                     }
                 }
@@ -114,6 +123,7 @@ const graphQlQuery: string = `
                         archived: isArchived
                         created_at: createdAt
                         updated_at: updatedAt
+                        socialImageUrl: openGraphImageUrl
                     }
                 }
             }

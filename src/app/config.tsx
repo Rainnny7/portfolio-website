@@ -29,11 +29,17 @@ export const appConfig: AppConfig = {
     },
     about: (
         <span>
-            A passionate {dayjs().diff(birthDate, "year")} year old software
-            engineer living in Toronto, Canada. I primarily work with the Java
-            programming language and have{" "}
-            {dayjs().diff(experienceStartDate, "year")} years of experience.
-            Below is a list of my skills and technologies I&apos;ve worked with:
+            A passionate{" "}
+            <b className="text-primary/90">
+                {dayjs().diff(birthDate, "year")} year old
+            </b>{" "}
+            software engineer living in Toronto, Canada. I primarily work with
+            the Java programming language and have{" "}
+            <b className="text-primary/90">
+                {dayjs().diff(experienceStartDate, "year")} years
+            </b>{" "}
+            of experience. Below is a list of my skills and technologies
+            I&apos;ve worked with:
         </span>
     ),
     skills: [
