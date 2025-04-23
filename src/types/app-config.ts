@@ -1,4 +1,5 @@
 import { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 import { Snowflake } from "use-tether";
 
 export type SocialConfig = {
@@ -11,4 +12,5 @@ export type SocialConfig = {
 export type AppConfig = {
     discordUserId: Snowflake;
     socials: Record<"discord" | "github" | "email", SocialConfig>;
+    about: ReactNode;
 };

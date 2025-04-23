@@ -60,7 +60,7 @@ const Navbar = (): ReactElement => (
                     href={link.href}
                     draggable={false}
                 >
-                    <link.icon className="size-4" />
+                    <link.icon className="hidden sm:block size-4" />
                     {link.name}
                 </Link>
             </SimpleTooltip>

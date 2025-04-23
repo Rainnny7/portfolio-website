@@ -9,7 +9,7 @@ import SimpleTooltip from "~/components/simple-tooltip";
 import { SocialConfig } from "~/types/app-config";
 
 const AboutSection = (): ReactElement => (
-    <section id="about" className="flex flex-col gap-3">
+    <section id="about" className="flex flex-col gap-4">
         {/* Name, Title, & Socials */}
         <div className="flex flex-col gap-2.5">
             <motion.h1
@@ -29,6 +29,7 @@ const AboutSection = (): ReactElement => (
                 Full Stack Software Engineer
             </motion.p>
 
+            {/* Socials */}
             <div className="flex gap-2 items-center">
                 {Object.values(appConfig.socials).map(
                     (social: SocialConfig, index: number) => (
@@ -75,6 +76,16 @@ const AboutSection = (): ReactElement => (
                 )}
             </div>
         </div>
+
+        {/* About Me */}
+        <motion.p
+            className="max-w-xl text-lg font-light text-muted-foreground"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.7 }}
+        >
+            {appConfig.about}
+        </motion.p>
     </section>
 );
 export default AboutSection;
