@@ -69,7 +69,9 @@ const Navbar = (): ReactElement => {
     const path: string = usePathname();
     const { open, setOpen } = useSidebar();
     const [activeSection, setActiveSection] = useState<string>("about");
+    const [hasScrolled, setHasScrolled] = useState<boolean>(false);
 
+    // Checking for the observered section
     useEffect(() => {
         const observer = new IntersectionObserver(
             (entries: IntersectionObserverEntry[]) => {
@@ -98,9 +100,21 @@ const Navbar = (): ReactElement => {
         return () => observer.disconnect();
     }, []);
 
+    // Checking if the user has scrolled
+    useEffect(() => {
+        const handleScroll = () => setHasScrolled(window.scrollY >= 30);
+        handleScroll();
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
+
     return (
         <motion.nav
-            className="fixed top-3.5 right-3.5 sm:inset-x-0 w-fit p-1 mx-auto flex gap-1 items-center text-sm text-white/85 bg-background/60 backdrop-blur-sm border border-border rounded-2xl z-50"
+            className={cn(
+                "fixed top-3.5 right-3.5 sm:inset-x-0 w-fit p-1 mx-auto flex gap-1 items-center text-sm text-white/85 bg-background/60 backdrop-blur-sm border border-border rounded-2xl duration-250 transition-all transform-gpu z-50",
+                hasScrolled &&
+                    "top-0 right-0 rounded-t-none rounded-br-none sm:rounded-br-2xl"
+            )}
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
