@@ -105,14 +105,16 @@ const Navbar = (): ReactElement => {
         >
             {/* Mobile Sidebar Button */}
             <div className="lg:hidden flex items-center gap-1">
-                <Button
-                    className="hover:bg-zinc-900/55 rounded-xl"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => setOpen(!open)}
-                >
-                    <PanelLeft className="size-4" />
-                </Button>
+                <SimpleTooltip content="Open sidebar" side="bottom">
+                    <Button
+                        className="hover:bg-zinc-900/55 rounded-xl"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => setOpen(!open)}
+                    >
+                        <PanelLeft className="size-4" />
+                    </Button>
+                </SimpleTooltip>
                 <Separator
                     orientation="vertical"
                     style={{
@@ -144,7 +146,7 @@ const Navbar = (): ReactElement => {
 
                             {/* Mobile name (only shows when active) */}
                             <motion.span
-                                className={cn(!active && "xs:hidden")}
+                                className={cn(!active && "hidden")}
                                 initial={{ opacity: 0, x: -10 }}
                                 animate={{
                                     opacity: active ? 1 : 0,
