@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import Background from "~/components/background";
 import HeroPattern from "~/components/hero-pattern";
 import Navbar from "~/components/navbar";
+import RoundedCursor from "~/components/rounded-cursor";
 import { env } from "~/lib/env";
 import { cn } from "~/lib/utils";
 import AppProviders from "~/provider/app-providers";
@@ -64,6 +65,7 @@ const RootLayout = ({
                         {children}
                     </div>
                 </div>
+                <RoundedCursor />
             </AppProviders>
         </body>
     </html>
