@@ -21,8 +21,9 @@ const AboutSection = (): ReactElement => (
             <motion.div
                 className="group w-fit px-3 py-1.5 flex gap-2 items-center text-sm text-white/90 font-light bg-primary/10 border border-border rounded-xl hover:bg-primary/15 transition-colors transform-gpu"
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5 }}
             >
                 <Briefcase className="size-4 text-primary" />
                 Looking to hire me? Let&apos;s talk!
@@ -35,16 +36,18 @@ const AboutSection = (): ReactElement => (
             <motion.h1
                 className="text-5xl font-bold"
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: 0.1 }}
             >
                 I&apos;m Braydon
             </motion.h1>
             <motion.p
                 className="text-lg font-light text-muted-foreground"
                 initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: 0.2 }}
             >
                 Full Stack Software Engineer
             </motion.p>
@@ -67,8 +70,9 @@ const AboutSection = (): ReactElement => (
         <motion.p
             className="max-w-xl text-lg font-light text-muted-foreground"
             initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.8 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.3 }}
         >
             {appConfig.about}
         </motion.p>
@@ -76,18 +80,14 @@ const AboutSection = (): ReactElement => (
         {/* Skills */}
         <motion.div
             className="max-w-md flex flex-wrap gap-2"
-            initial="hidden"
-            animate="visible"
-            variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                    opacity: 1,
-                    transition: {
-                        delay: 1.15,
-                        staggerChildren: 0.05,
-                        delayChildren: 0.3,
-                    },
-                },
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{
+                duration: 0.5,
+                delay: 0.4,
+                staggerChildren: 0.05,
+                delayChildren: 0.1,
             }}
         >
             {appConfig.skills.map((skill: Skill, index: number) => (

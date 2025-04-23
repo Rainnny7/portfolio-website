@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { ReactElement } from "react";
 import AboutSection from "~/components/landing/sections/about-section";
 import HomelabSection from "~/components/landing/sections/homelab-section";
+import MediaSection from "~/components/landing/sections/media-section";
 import ProjectsSection from "~/components/landing/sections/projects-section";
 import Sidebar from "~/components/landing/sidebar";
 
@@ -18,6 +19,7 @@ const LandingPage = (): ReactElement => (
             <AboutSection />
             <ProjectsSection />
             <HomelabSection />
+            <MediaSection />
         </div>
     </main>
 );

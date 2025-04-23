@@ -4,8 +4,8 @@ import { Server } from "lucide-react";
 import { motion } from "motion/react";
 import { Separator } from "~/components/ui/separator";
 
-const HomelabSection = () => (
-    <section id="homelab" className="py-40 flex flex-col gap-4">
+const MediaSection = () => (
+    <section id="media" className="py-40 flex flex-col gap-4">
         {/* Header */}
         <div className="flex flex-col gap-2">
             <motion.h2
@@ -16,7 +16,7 @@ const HomelabSection = () => (
                 transition={{ duration: 0.5 }}
             >
                 <Server className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
-                My Homelab
+                My Media
             </motion.h2>
             <motion.p
                 className="max-w-lg text-lg text-muted-foreground font-light"
@@ -25,8 +25,8 @@ const HomelabSection = () => (
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
-                This is my homelab so far, it hosts all my services, including
-                this website! I work on it in my spare time when I can (:
+                This is just a bunch of random media of things I&apos;ve made
+                throughout the years, enjoy!
             </motion.p>
         </div>
 
@@ -43,4 +43,4 @@ const HomelabSection = () => (
         </motion.p>
     </section>
 );
-export default HomelabSection;
+export default MediaSection;

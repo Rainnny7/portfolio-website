@@ -48,8 +48,9 @@ const ProjectsSection = (): ReactElement => {
                 <motion.h2
                     className="text-4xl font-bold flex gap-4 items-center"
                     initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.5 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5 }}
                 >
                     <Briefcase className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
                     My Projects
@@ -57,8 +58,9 @@ const ProjectsSection = (): ReactElement => {
                 <motion.p
                     className="max-w-lg text-lg text-muted-foreground font-light"
                     initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 1.6 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
                 >
                     Here are some of the projects I&apos;ve worked on.
                 </motion.p>
@@ -70,11 +72,9 @@ const ProjectsSection = (): ReactElement => {
                 <motion.div
                     className="flex flex-wrap gap-2 items-center"
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{
-                        duration: 0.5,
-                        delay: 1,
-                    }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.5 }}
                 >
                     {Array.from({ length: 5 }).map((_, index: number) => (
                         <Skeleton
@@ -102,11 +102,11 @@ const ProjectsSection = (): ReactElement => {
                     {/* Pagination Controls */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-100px" }}
                         transition={{
                             duration: 0.5,
-                            delay:
-                                1.7 + (pagedProjects?.items?.length ?? 0) * 0.1,
+                            delay: 0.1,
                         }}
                     >
                         <PaginationControls
@@ -143,10 +143,11 @@ const Project = ({
             key={project.id}
             className="w-full md:w-fit"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
             transition={{
                 duration: 0.5,
-                delay: (page === 1 ? 0.9 : 0.2) + index * 0.1,
+                delay: index * 0.1,
             }}
         >
             <Link
