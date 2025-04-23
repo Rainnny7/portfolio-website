@@ -51,7 +51,7 @@ const ProjectsSection = (): ReactElement => {
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, delay: 0.6 }}
                 >
                     <Briefcase className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
                     My Projects
@@ -61,7 +61,7 @@ const ProjectsSection = (): ReactElement => {
                     initial={{ opacity: 0, y: -20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
                 >
                     Here are some of the projects I&apos;ve worked on.
                 </motion.p>
@@ -75,7 +75,7 @@ const ProjectsSection = (): ReactElement => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5 }}
+                    transition={{ duration: 0.5, delay: 0.7 }}
                 >
                     {Array.from({ length: 5 }).map((_, index: number) => (
                         <Skeleton
@@ -106,7 +106,7 @@ const ProjectsSection = (): ReactElement => {
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{
                             duration: 0.5,
-                            delay: 0.1,
+                            delay: 1,
                         }}
                     >
                         <PaginationControls

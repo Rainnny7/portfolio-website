@@ -1,6 +1,7 @@
 "use client";
 
 import {
+    Activity,
     Briefcase,
     Home,
     Image,
@@ -47,6 +48,13 @@ const links: NavbarLink[] = [
         tooltip: "My projects",
         href: "/#projects",
         sectionId: "projects",
+    },
+    {
+        name: "Activity",
+        icon: Activity,
+        tooltip: "My activity",
+        href: "/#activity",
+        sectionId: "activity",
     },
     {
         name: "Homelab",

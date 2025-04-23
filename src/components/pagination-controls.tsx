@@ -49,9 +49,9 @@ const PaginationControls = ({
         <div className="w-full flex flex-col-reverse md:flex-row justify-between gap-3 items-center">
             {/* Left - Total Records */}
             <div className="flex gap-2 items-center text-sm text-muted-foreground">
-                Showing rows {numberWithCommas(page?.metadata.start ?? 0)} -{" "}
+                Showing items {numberWithCommas(page?.metadata.start ?? 0)} -{" "}
                 {numberWithCommas(page?.metadata.end ?? 0)} of{" "}
-                {numberWithCommas(page?.metadata.totalItems ?? 0)} records (Took{" "}
+                {numberWithCommas(page?.metadata.totalItems ?? 0)} (Took{" "}
                 {formatResponseTime(responseTime)})
             </div>
 
