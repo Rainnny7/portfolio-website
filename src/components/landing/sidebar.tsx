@@ -8,8 +8,15 @@ import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser, useTetherWS } from "use-tether";
 import { appConfig } from "~/app/config";
 import SimpleTooltip from "~/components/simple-tooltip";
+import {
+    Sheet,
+    SheetContent,
+    SheetHeader,
+    SheetTitle,
+} from "~/components/ui/sheet";
 import { capitalizeWords, truncateText } from "~/lib/string";
 import { cn } from "~/lib/utils";
+import { useSidebar } from "~/provider/sidebar-provider";
 
 type Indicator = {
     icon: LucideIcon;
@@ -49,21 +56,49 @@ const Sidebar = (): ReactElement => {
             )}
         >
             {/* Content */}
-            <div className="h-full -ml-7 flex flex-col gap-4 justify-between items-center">
-                <Introduction discordUser={discordUser} />
-                <SpotifyStatus discordUser={discordUser} />
-            </div>
+            <SidebarContent discordUser={discordUser} />
+            <MobileSidebar discordUser={discordUser} />
         </div>
     );
 };
+
+const MobileSidebar = ({
+    discordUser,
+}: {
+    discordUser: DiscordUser | undefined;
+}): ReactElement => {
+    const { open, setOpen } = useSidebar();
+    return (
+        <Sheet open={open} onOpenChange={setOpen}>
+            <SheetContent className="w-[20rem] pb-7 bg-background" side="left">
+                <SheetHeader>
+                    <SheetTitle />
+                </SheetHeader>
+                <SidebarContent discordUser={discordUser} />
+            </SheetContent>
+        </Sheet>
+    );
+};
+
+const SidebarContent = ({
+    discordUser,
+}: {
+    discordUser: DiscordUser | undefined;
+}): ReactElement => (
+    <div className="h-full -ml-7 flex flex-col gap-4 justify-between items-center">
+        <Introduction discordUser={discordUser} />
+        <SpotifyStatus discordUser={discordUser} />
+    </div>
+);
 
 const Introduction = ({
     discordUser,
 }: {
     discordUser: DiscordUser | undefined;
 }): ReactElement => {
-    const indicator = indicators[discordUser?.onlineStatus ?? "OFFLINE"];
-    const Icon = indicator.icon;
+    const indicator: Indicator =
+        indicators[discordUser?.onlineStatus ?? "OFFLINE"];
+    const Icon: LucideIcon = indicator.icon;
     return (
         <div className="flex flex-col gap-4 items-center">
             {/* Introduction */}

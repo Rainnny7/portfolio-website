@@ -1,11 +1,22 @@
 "use client";
 
-import { Briefcase, Home, Image, LucideIcon, Server, User } from "lucide-react";
+import {
+    Briefcase,
+    Home,
+    Image,
+    LucideIcon,
+    PanelLeft,
+    Server,
+    User,
+} from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import { ReactElement, useEffect, useState } from "react";
 import SimpleTooltip from "~/components/simple-tooltip";
+import { Button } from "~/components/ui/button";
+import { Separator } from "~/components/ui/separator";
 import { cn } from "~/lib/utils";
+import { useSidebar } from "~/provider/sidebar-provider";
 
 type NavbarLink = {
     name: string;
@@ -54,6 +65,7 @@ const links: NavbarLink[] = [
 ];
 
 const Navbar = (): ReactElement => {
+    const { open, setOpen } = useSidebar();
     const [activeSection, setActiveSection] = useState<string>("about");
 
     useEffect(() => {
@@ -86,32 +98,58 @@ const Navbar = (): ReactElement => {
 
     return (
         <motion.nav
-            className="fixed top-3.5 inset-x-0 w-fit p-1 mx-auto flex gap-1 items-center text-sm text-white/85 bg-background/60 backdrop-blur-sm border border-border rounded-2xl z-50"
+            className="fixed top-3.5 right-3.5 sm:inset-x-0 w-fit p-1 mx-auto flex gap-1 items-center text-sm text-white/85 bg-background/60 backdrop-blur-sm border border-border rounded-2xl z-50"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
         >
-            {links.map((link: NavbarLink) => (
-                <SimpleTooltip
-                    key={link.name}
-                    content={link.tooltip}
-                    side="bottom"
+            {/* Mobile Sidebar Button */}
+            <div className="lg:hidden flex items-center gap-1">
+                <Button
+                    className="hover:bg-zinc-900/55 rounded-xl"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => setOpen(!open)}
                 >
-                    <Link
-                        className={cn(
-                            "px-5 py-1.5 flex gap-2.5 items-center hover:bg-zinc-900/55 rounded-xl transition-colors transform-gpu",
-                            activeSection === link.sectionId &&
-                                link.sectionId !== "home" &&
-                                "bg-zinc-900/55"
-                        )}
-                        href={link.href}
-                        draggable={false}
+                    <PanelLeft className="size-4" />
+                </Button>
+                <Separator
+                    orientation="vertical"
+                    style={{
+                        height: "1.5rem",
+                    }}
+                />
+            </div>
+
+            {/* Links */}
+            {links.map((link: NavbarLink) => {
+                const active: boolean =
+                    activeSection === link.sectionId &&
+                    link.sectionId !== "home";
+                return (
+                    <SimpleTooltip
+                        key={link.name}
+                        content={link.tooltip}
+                        side="bottom"
                     >
-                        <link.icon className="hidden sm:block size-4" />
-                        {link.name}
-                    </Link>
-                </SimpleTooltip>
-            ))}
+                        <Link
+                            className={cn(
+                                "px-2 sm:px-3.5 md:px-5 py-1.5 flex gap-1.5 sm:gap-2.5 items-center hover:bg-zinc-900/55 rounded-xl transition-all transform-gpu",
+                                active && "bg-zinc-900/55"
+                            )}
+                            href={link.href}
+                            draggable={false}
+                        >
+                            <link.icon className="size-4" />
+                            <span
+                                className={cn(!active && "hidden", "sm:block")}
+                            >
+                                {link.name}
+                            </span>
+                        </Link>
+                    </SimpleTooltip>
+                );
+            })}
         </motion.nav>
     );
 };

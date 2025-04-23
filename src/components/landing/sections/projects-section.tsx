@@ -131,6 +131,7 @@ const Project = ({
     >
         <motion.div
             key={project.id}
+            className="w-full md:w-fit"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{
@@ -139,13 +140,13 @@ const Project = ({
             }}
         >
             <Link
-                className="p-4 w-[20rem] xl:w-[22rem] 2xl:w-[30rem] min-h-[12.5rem] 2xl:min-h-[9.5rem] flex flex-col gap-2 bg-background/50 backdrop-blur-sm border border-border rounded-2xl hover:border-primary/50 transition-colors transform-gpu"
+                className="p-4 w-full md:w-[24.5rem] lg:w-[18.5rem] xl:w-[22.5rem] 2xl:w-[23.5rem] min-h-[14rem] lg:min-h-[12.5rem] 2xl:min-h-[11rem] flex flex-col gap-2 bg-background/50 backdrop-blur-sm border border-border rounded-2xl hover:border-primary/50 transition-colors transform-gpu"
                 href={project.html_url}
                 target="_blank"
                 draggable={false}
             >
                 {/* Repository Name & Pin Badge */}
-                <div className="flex items-center justify-between">
+                <div className="flex justify-between gap-1.5 items-center">
                     <h3 className="text-xl font-semibold">{project.name}</h3>
                     {project.isPinned && (
                         <SimpleTooltip
@@ -158,7 +159,7 @@ const Project = ({
                 </div>
 
                 {/* Repository Description */}
-                <p className="text-muted-foreground font-light mt-1">
+                <p className="mt-1 text-muted-foreground font-light">
                     {truncateText(
                         project.description ?? "No description );",
                         124
