@@ -189,24 +189,28 @@ const SpotifyStatus = ({
 
     // Format duration in minutes:seconds
     const formatDuration = (millis: number): string => {
-        const minutes: number = Math.floor(millis / 60000);
-        const seconds: number = Math.floor((millis % 60000) / 1000);
+        const totalSeconds = Math.floor(millis / 1000);
+        const minutes = Math.floor(totalSeconds / 60);
+        const seconds = totalSeconds % 60;
         return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     };
 
-    const [currentProgress, setCurrentProgress] = useState<string>(
-        spotify?.trackProgress ? formatDuration(spotify.trackProgress) : "0:00"
-    );
+    const [currentProgress, setCurrentProgress] = useState<string>("0:00");
 
+    // Update the current progress every second
     useEffect(() => {
         if (!spotify?.started) return;
-
-        const interval = setInterval(() => {
-            setCurrentProgress(formatDuration(spotify.trackProgress));
-        }, 1000);
-
+        const updateProgress = () => {
+            setCurrentProgress(
+                formatDuration(
+                    Math.min(Date.now() - spotify.started, spotify.trackLength)
+                )
+            );
+        };
+        updateProgress();
+        const interval = setInterval(() => updateProgress(), 1000);
         return () => clearInterval(interval);
-    }, [spotify?.started, spotify?.trackLength, spotify?.trackProgress]);
+    }, [spotify]);
     if (!spotify) return undefined;
 
     return (
