@@ -189,6 +189,7 @@ const Project = ({
                                 src={project.socialImageUrl}
                                 alt={project.name}
                                 fill
+                                draggable={false}
                             />
                         </div>
 
