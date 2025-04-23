@@ -1,9 +1,14 @@
+import { Metadata } from "next";
 import { ReactElement } from "react";
 import HeroPattern from "~/components/hero-pattern";
 import AboutSection from "~/components/landing/sections/about-section";
 import HomelabSection from "~/components/landing/sections/homelab-section";
 import ProjectsSection from "~/components/landing/sections/projects-section";
 import Sidebar from "~/components/landing/sidebar";
+
+export const metadata: Metadata = {
+    title: "Hi there!",
+};
 
 const LandingPage = (): ReactElement => (
     <main className="min-h-screen flex">
