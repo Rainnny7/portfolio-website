@@ -55,7 +55,7 @@ const RootLayout = ({
             />
             <AppProviders>
                 <div className="relative min-h-screen">
-                    {/* Background - Bottom Right */}
+                    {/* Backgrounds */}
                     <HeroPattern />
                     <Background />
 
