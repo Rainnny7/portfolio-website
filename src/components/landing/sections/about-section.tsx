@@ -1,22 +1,38 @@
 "use client";
 
+import { Briefcase } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { ReactElement } from "react";
 import { appConfig } from "~/app/config";
+import AnimatedRightChevron from "~/components/animated-right-chevron";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { SocialConfig } from "~/types/app-config";
 
 const AboutSection = (): ReactElement => (
     <section id="about" className="flex flex-col gap-4">
+        {/* Hire Me */}
+        <Link className="w-fit " href={appConfig.socials.email.href}>
+            <motion.div
+                className="group w-fit px-3 py-1.5 flex gap-2 items-center text-sm text-white/90 font-light bg-primary/10 border border-border rounded-xl hover:bg-primary/15 transition-colors transform-gpu"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+            >
+                <Briefcase className="size-4 text-red-500" />
+                Looking to hire me? Let&apos;s talk!
+                <AnimatedRightChevron />
+            </motion.div>
+        </Link>
+
         {/* Name, Title, & Socials */}
         <div className="flex flex-col gap-2.5">
             <motion.h1
                 className="text-5xl font-bold"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
             >
                 I&apos;m Braydon
             </motion.h1>
@@ -24,7 +40,7 @@ const AboutSection = (): ReactElement => (
                 className="text-lg font-light text-muted-foreground"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
             >
                 Full Stack Software Engineer
             </motion.p>
@@ -40,7 +56,7 @@ const AboutSection = (): ReactElement => (
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{
                                 duration: 0.5,
-                                delay: 0.3 + index * 0.1,
+                                delay: 0.4 + index * 0.1,
                             }}
                         >
                             <SimpleTooltip
@@ -82,7 +98,7 @@ const AboutSection = (): ReactElement => (
             className="max-w-xl text-lg font-light text-muted-foreground"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.7 }}
+            transition={{ duration: 0.5, delay: 0.8 }}
         >
             {appConfig.about}
         </motion.p>

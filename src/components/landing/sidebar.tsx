@@ -4,7 +4,7 @@ import { Circle, CircleX, LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser, useTetherWS } from "use-tether";
 import { appConfig } from "~/app/config";
 import SimpleTooltip from "~/components/simple-tooltip";
@@ -44,7 +44,7 @@ const Sidebar = (): ReactElement => {
     return (
         <div
             className={cn(
-                "w-[20rem] pt-28 pb-14 bg-background/65",
+                "sticky top-0 w-[20rem] h-screen pt-32 pb-7 bg-background/65 z-50",
                 "[mask-image:linear-gradient(to_right,black_90%,transparent)]"
             )}
         >
@@ -113,7 +113,7 @@ const Introduction = ({
                     >
                         <Icon
                             className={cn(
-                                "absolute -bottom-1 left-3.5 p-1 size-6 bg-background rounded-full",
+                                "absolute -bottom-1 right-3.5 p-1 size-6 bg-background rounded-full",
                                 discordUser &&
                                     "hover:opacity-90 transition-opacity transform-gpu",
                                 indicator.color
@@ -148,62 +148,82 @@ const SpotifyStatus = ({
     discordUser: DiscordUser | undefined;
 }): ReactElement | undefined => {
     const spotify = discordUser?.spotify;
-    if (!spotify) return undefined;
 
     // Format duration in minutes:seconds
-    const formatDuration = (ms: number) => {
-        const minutes = Math.floor(ms / 60000);
-        const seconds = Math.floor((ms % 60000) / 1000);
+    const formatDuration = (millis: number): string => {
+        const minutes: number = Math.floor(millis / 60000);
+        const seconds: number = Math.floor((millis % 60000) / 1000);
         return `${minutes}:${seconds.toString().padStart(2, "0")}`;
     };
 
+    const [currentProgress, setCurrentProgress] = useState<string>(
+        spotify?.trackProgress ? formatDuration(spotify.trackProgress) : "0:00"
+    );
+
+    useEffect(() => {
+        if (!spotify?.started) return;
+
+        const interval = setInterval(() => {
+            setCurrentProgress(formatDuration(spotify.trackProgress));
+        }, 1000);
+
+        return () => clearInterval(interval);
+    }, [spotify?.started, spotify?.trackLength, spotify?.trackProgress]);
+    if (!spotify) return undefined;
+
     return (
-        <Link
-            className="w-[calc(100%-5rem)] px-2 py-1.5 flex gap-2.5 items-center bg-muted/15 border border-border rounded-lg"
-            href={spotify.trackUrl}
-            target="_blank"
+        <motion.div
+            className="w-[calc(100%-5rem)] px-2 py-1.5 bg-muted/15 border border-border rounded-lg"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
         >
-            {/* Album Art */}
-            <Image
-                className="rounded-lg"
-                src={spotify.albumArtUrl}
-                alt="Spotify"
-                width={38}
-                height={38}
+            <Link
+                className="w-full flex gap-2.5 items-center hover:opacity-75 transition-opacity transform-gpu"
+                href={spotify.trackUrl}
+                target="_blank"
                 draggable={false}
-            />
+            >
+                {/* Album Art */}
+                <Image
+                    className="rounded-lg"
+                    src={spotify.albumArtUrl}
+                    alt="Spotify"
+                    width={38}
+                    height={38}
+                    draggable={false}
+                />
 
-            {/* Song Info */}
-            <div className="w-full flex flex-col">
-                {/* Song Name & Spotify Logo */}
-                <div className="w-full flex gap-1 items-center">
-                    <span className="text-xs font-medium">
-                        {truncateText(spotify.song, 48)}
-                    </span>
-                    <Image
-                        className="ml-auto"
-                        src="/media/spotify.png"
-                        alt="Spotify"
-                        width={16}
-                        height={16}
-                        draggable={false}
-                    />
-                </div>
-
-                {/* Song Artist & Duration */}
+                {/* Song Info */}
                 <div className="w-full flex flex-col">
-                    <span className="text-xs text-muted-foreground">
-                        {truncateText(spotify.artist, 24)}
-                    </span>
-                    <span className="text-2xs text-muted-foreground">
-                        {spotify.started
-                            ? formatDuration(spotify.trackProgress)
-                            : "0:00"}{" "}
-                        / {formatDuration(spotify.trackLength)}
-                    </span>
+                    {/* Song Name & Spotify Logo */}
+                    <div className="w-full flex gap-1 items-center">
+                        <span className="text-xs font-medium">
+                            {truncateText(spotify.song, 48)}
+                        </span>
+                        <Image
+                            className="ml-auto"
+                            src="/media/spotify.png"
+                            alt="Spotify"
+                            width={16}
+                            height={16}
+                            draggable={false}
+                        />
+                    </div>
+
+                    {/* Song Artist & Duration */}
+                    <div className="w-full flex flex-col">
+                        <span className="text-xs text-muted-foreground">
+                            {truncateText(spotify.artist, 24)}
+                        </span>
+                        <span className="text-2xs text-muted-foreground">
+                            {currentProgress} /{" "}
+                            {formatDuration(spotify.trackLength)}
+                        </span>
+                    </div>
                 </div>
-            </div>
-        </Link>
+            </Link>
+        </motion.div>
     );
 };
 

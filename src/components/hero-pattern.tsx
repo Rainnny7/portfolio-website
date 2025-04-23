@@ -12,7 +12,7 @@ const HeroPattern = (): ReactElement => (
         className="pointer-events-none absolute inset-0 mx-0 max-w-none overflow-hidden"
     >
         <div className="absolute left-1/2 top-0 ml-[-38rem] h-[25rem] w-[81.25rem] [mask-image:linear-gradient(white,transparent)]">
-            <div className="absolute inset-0 bg-gradient-to-r from-red-400/80 to-primary/80 opacity-20 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)]">
+            <div className="absolute inset-0 bg-gradient-to-r from-red-400 to-primary/85 opacity-20 [mask-image:radial-gradient(farthest-side_at_top,white,transparent)]">
                 <GridPattern
                     width={72}
                     height={56}
