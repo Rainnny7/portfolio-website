@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     title: "Hi there!",
 };
 
+export const dynamic = "force-dynamic";
+
 const LandingPage = (): ReactElement => (
     <main className="min-h-screen flex">
         <Sidebar />
