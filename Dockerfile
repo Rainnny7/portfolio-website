@@ -31,8 +31,6 @@ RUN chown -R nextjs:nextjs /usr/src/app /tmp
 RUN chmod -R 755 /usr/src/app /tmp
 
 COPY --from=builder --chown=nextjs:nextjs /usr/src/app/.next ./.next
-COPY --from=builder --chown=nextjs:nextjs /usr/src/app/drizzle ./drizzle
-COPY --from=builder --chown=nextjs:nextjs /usr/src/app/drizzle.config.ts ./drizzle.config.ts
 COPY --from=builder --chown=nextjs:nextjs /usr/src/app/next.config.ts ./next.config.ts
 COPY --from=builder --chown=nextjs:nextjs /usr/src/app/tsconfig.json ./tsconfig.json
 COPY --from=builder --chown=nextjs:nextjs /usr/src/app/src ./src

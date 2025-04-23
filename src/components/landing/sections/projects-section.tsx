@@ -159,7 +159,7 @@ const Project = ({
                 </div>
 
                 {/* Repository Description */}
-                <p className="mt-1 text-muted-foreground font-light">
+                <p className="mt-1 line-clamp-2 text-muted-foreground font-light">
                     {truncateText(
                         project.description ?? "No description );",
                         124
