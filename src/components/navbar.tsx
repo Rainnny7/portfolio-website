@@ -139,14 +139,14 @@ const Navbar = (): ReactElement => {
             </div>
 
             {/* Links */}
-            {links.map((link: NavbarLink) => {
+            {links.map((link: NavbarLink, index: number) => {
                 const active: boolean =
                     path === "/" &&
                     activeSection === link.sectionId &&
                     link.sectionId !== "home";
                 return (
                     <SimpleTooltip
-                        key={link.name}
+                        key={index}
                         content={link.tooltip}
                         side="bottom"
                     >
