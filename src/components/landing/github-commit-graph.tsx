@@ -44,7 +44,7 @@ export default function GithubCommitGraph() {
     return (
         <div className="overflow-x-auto">
             <div className="w-fit flex flex-col gap-1.5">
-                <div className="p-2 relative border border-muted/50 rounded-lg">
+                <div className="p-2 relative bg-background/50 border border-muted/50 rounded-lg">
                     {/* Month labels row */}
                     <div className="mb-1 ml-8 flex text-xs text-muted-foreground">
                         {monthPositions.map(
@@ -82,7 +82,7 @@ export default function GithubCommitGraph() {
 
                     <div className="w-full flex">
                         {/* Day of week labels */}
-                        <div className="mr-2 pt-1 text-xs text-muted-foreground">
+                        <div className="mr-2 text-xs text-muted-foreground">
                             {dayLabels.map((day, i) => (
                                 <div
                                     key={`day-${i}`}
@@ -240,6 +240,7 @@ const generateCalendarData = (
 
     // Track last seen month for detecting month changes
     let lastMonth: number = -1;
+    let lastMonthWeekIndex: number = -1;
 
     // Create a map of dates to contribution counts
     const contributionMap = new Map<string, number>();
@@ -261,10 +262,18 @@ const generateCalendarData = (
 
         // Check for month change and record position
         if (month !== lastMonth) {
-            monthPositions.push({
-                month: MONTH_NAMES[month],
-                weekIndex: weeks.length,
-            });
+            // Always show the first month
+            // For subsequent months, ensure there's at least one week gap
+            if (
+                monthPositions.length === 0 ||
+                weeks.length - lastMonthWeekIndex >= 2
+            ) {
+                monthPositions.push({
+                    month: MONTH_NAMES[month],
+                    weekIndex: weeks.length,
+                });
+                lastMonthWeekIndex = weeks.length;
+            }
             lastMonth = month;
         }
 
@@ -288,6 +297,14 @@ const generateCalendarData = (
     // Add any remaining days in the last week
     if (currentWeek.length > 0) {
         weeks.push([...currentWeek]);
+    }
+
+    // Ensure the last month has enough space
+    if (monthPositions.length > 0) {
+        const lastMonth = monthPositions[monthPositions.length - 1];
+        if (weeks.length - lastMonth.weekIndex < 2) {
+            monthPositions.pop();
+        }
     }
 
     return {
