@@ -5,13 +5,13 @@ import { cn } from "~/lib/utils";
 
 export const InfiniteMovingCards = ({
     direction = "left",
-    speed = "fast",
+    speed = 100,
     pauseOnHover = true,
     className,
     children,
 }: {
     direction?: "left" | "right";
-    speed?: "fast" | "normal" | "slow";
+    speed?: number; // pixels per second
     pauseOnHover?: boolean;
     className?: string;
     children: React.ReactNode;
@@ -55,23 +55,13 @@ export const InfiniteMovingCards = ({
         }
     };
     const getSpeed = () => {
-        if (containerRef.current) {
-            if (speed === "fast") {
-                containerRef.current.style.setProperty(
-                    "--animation-duration",
-                    "20s"
-                );
-            } else if (speed === "normal") {
-                containerRef.current.style.setProperty(
-                    "--animation-duration",
-                    "40s"
-                );
-            } else {
-                containerRef.current.style.setProperty(
-                    "--animation-duration",
-                    "80s"
-                );
-            }
+        if (containerRef.current && scrollerRef.current) {
+            const width = scrollerRef.current.scrollWidth;
+            const duration = width / speed;
+            containerRef.current.style.setProperty(
+                "--animation-duration",
+                `${duration}s`
+            );
         }
     };
     return (
@@ -85,7 +75,7 @@ export const InfiniteMovingCards = ({
             <ul
                 ref={scrollerRef}
                 className={cn(
-                    "flex w-max min-w-full shrink-0 flex-nowrap gap-4 py-4",
+                    "flex w-max min-w-full shrink-0 flex-nowrap gap-2 py-4",
                     start && "animate-scroll",
                     pauseOnHover && "hover:[animation-play-state:paused]"
                 )}
