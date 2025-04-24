@@ -42,6 +42,7 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                 name: repo.nameWithOwner,
                 language: repo.language ? { name: repo.language.name } : null,
                 isPinned: true,
+                tags: repo.topics?.nodes?.map((node) => node.topic.name) || [],
                 socialImageUrl:
                     // repo.socialImageUrl ||
                     // `https://opengraph.githubassets.com/${repo.nameWithOwner}`,
@@ -65,6 +66,10 @@ export const getRepositories = async (): Promise<GithubProjectResponse> => {
                             ? { name: repo.language.name }
                             : null,
                         isPinned: false,
+                        tags:
+                            repo.topics?.nodes?.map(
+                                (node) => node.topic.name
+                            ) || [],
                         socialImageUrl:
                             // repo.socialImageUrl ||
                             // `https://opengraph.githubassets.com/${repo.nameWithOwner}`,
@@ -105,6 +110,13 @@ const graphQlQuery: string = `
                             created_at: createdAt
                             updated_at: updatedAt
                             socialImageUrl: openGraphImageUrl
+                            topics: repositoryTopics(first: 10) {
+                                nodes {
+                                    topic {
+                                        name
+                                    }
+                                }
+                            }
                         }
                     }
                 }
@@ -124,6 +136,13 @@ const graphQlQuery: string = `
                         created_at: createdAt
                         updated_at: updatedAt
                         socialImageUrl: openGraphImageUrl
+                        topics: repositoryTopics(first: 10) {
+                            nodes {
+                                topic {
+                                    name
+                                }
+                            }
+                        }
                     }
                 }
             }

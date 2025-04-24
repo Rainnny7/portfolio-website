@@ -13,6 +13,7 @@ import {
 import PaginationControls from "~/components/pagination-controls";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Badge } from "~/components/ui/badge";
+import { InfiniteMovingCards } from "~/components/ui/infinite-moving-cards";
 import { MagicCard } from "~/components/ui/magic-card";
 import { Skeleton } from "~/components/ui/skeleton";
 import { Page, Paginator } from "~/lib/paginator";
@@ -213,10 +214,61 @@ const Project = ({
                                     fill
                                     draggable={false}
                                 />
+
+                                {/* Language, Stars, and Forks */}
+                                <div className="absolute top-0 right-0 p-2 flex flex-col gap-1 items-end bg-black/70 backdrop-blur-sm rounded-bl-lg rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                    {project.language && (
+                                        <SimpleTooltip
+                                            content={
+                                                <span>
+                                                    This project is made with{" "}
+                                                    <b>
+                                                        {project.language.name}
+                                                    </b>
+                                                </span>
+                                            }
+                                            side="left"
+                                        >
+                                            <span className="text-sm text-white/90">
+                                                {project.language.name}
+                                            </span>
+                                        </SimpleTooltip>
+                                    )}
+                                    <SimpleTooltip
+                                        content={
+                                            <span>
+                                                This project has{" "}
+                                                {project.stargazers_count} star
+                                                {project.stargazers_count === 1
+                                                    ? ""
+                                                    : "s"}
+                                            </span>
+                                        }
+                                        side="left"
+                                    >
+                                        <span className="text-sm text-white/90">
+                                            ⭐ {project.stargazers_count}
+                                        </span>
+                                    </SimpleTooltip>
+                                    <SimpleTooltip
+                                        content={
+                                            <span>
+                                                This project has {project.forks}{" "}
+                                                fork
+                                                {project.forks === 1 ? "" : "s"}
+                                            </span>
+                                        }
+                                        side="left"
+                                    >
+                                        <span className="text-sm text-white/90">
+                                            🍴 {project.forks}
+                                        </span>
+                                    </SimpleTooltip>
+                                </div>
                             </div>
                         </div>
 
-                        <div className="p-4 h-full flex flex-col">
+                        <div className="p-4 h-full flex flex-col gap-1.5">
                             {/* Repository Name & Pin Badge */}
                             <div className="flex justify-between gap-1.5 items-center">
                                 <h3 className="inline-flex gap-1 items-center text-xl font-semibold">
@@ -240,56 +292,20 @@ const Project = ({
                                 )}
                             </p>
 
-                            {/* Spacer */}
-                            <div className="flex-1" />
-
-                            {/* Repository Language, Stars, & Forks */}
-                            <div className="pt-5 flex gap-4 text-sm text-muted-foreground">
-                                {/* Language */}
-                                {project.language && (
-                                    <SimpleTooltip
-                                        content={
-                                            <span>
-                                                This project is made with{" "}
-                                                <b>{project.language.name}</b>
-                                            </span>
-                                        }
-                                        side="bottom"
-                                    >
-                                        <span>{project.language.name}</span>
-                                    </SimpleTooltip>
-                                )}
-
-                                {/* Stars */}
-                                <SimpleTooltip
-                                    content={
-                                        <span>
-                                            This project has{" "}
-                                            {project.stargazers_count} star
-                                            {project.stargazers_count === 1
-                                                ? ""
-                                                : "s"}
-                                        </span>
-                                    }
-                                    side="bottom"
-                                >
-                                    <span>⭐ {project.stargazers_count}</span>
-                                </SimpleTooltip>
-
-                                {/* Forks */}
-                                <SimpleTooltip
-                                    content={
-                                        <span>
-                                            This project has {project.forks}{" "}
-                                            fork
-                                            {project.forks === 1 ? "" : "s"}
-                                        </span>
-                                    }
-                                    side="bottom"
-                                >
-                                    <span>🍴 {project.forks}</span>
-                                </SimpleTooltip>
-                            </div>
+                            {/* Tags */}
+                            {project.tags && (
+                                <InfiniteMovingCards speed={50}>
+                                    {project.tags.map((tag) => (
+                                        <Badge
+                                            key={tag}
+                                            className="text-xs text-white/85"
+                                            variant="secondary"
+                                        >
+                                            {tag}
+                                        </Badge>
+                                    ))}
+                                </InfiniteMovingCards>
+                            )}
                         </div>
                     </MagicCard>
                 </Link>

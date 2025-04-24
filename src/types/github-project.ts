@@ -14,4 +14,12 @@ export type GithubProject = {
     updated_at: string;
     isPinned: boolean;
     socialImageUrl: string;
+    tags: string[];
+    topics?: {
+        nodes: Array<{
+            topic: {
+                name: string;
+            };
+        }>;
+    };
 };
