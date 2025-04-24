@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Briefcase, Pin, Sparkle } from "lucide-react";
+import { Briefcase, Clock, Pin, Sparkle } from "lucide-react";
 import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
@@ -24,7 +24,7 @@ const ProjectsSection = (): ReactElement => {
     const { isLoading, data: githubResponse } = useQuery<GithubProjectResponse>(
         {
             queryKey: ["github-projects"],
-            queryFn: async () => await getRepositories(),
+            queryFn: getRepositories,
         }
     );
     const [pagedProjects, setPagedProjects] = useState<
@@ -36,7 +36,7 @@ const ProjectsSection = (): ReactElement => {
         const getPagedProjects = async () => {
             const pagedProjects = await new Paginator<GithubProject>()
                 .setItems(githubResponse.projects)
-                .setItemsPerPage(9)
+                .setItemsPerPage(6)
                 .setTotalItems(githubResponse.projects.length)
                 .getPage(page);
             setPagedProjects(pagedProjects);
@@ -139,6 +139,11 @@ const Project = ({
     const isNew: boolean =
         new Date(project.created_at) >
         new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
+
+    // A project is considered recently updated if it was updated in the last week
+    const recentlyUpdated: boolean =
+        new Date(project.updated_at) >
+        new Date(Date.now() - 7 * 24 * 60 * 60 * 1000);
     return (
         <SimpleTooltip
             content={
@@ -150,7 +155,7 @@ const Project = ({
         >
             <motion.li
                 key={project.id}
-                className="w-full md:w-fit"
+                className="group w-full md:w-fit"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -167,7 +172,7 @@ const Project = ({
                         gradientTo="#FE5454"
                     >
                         {/* New Badge */}
-                        {isNew && (
+                        {isNew ? (
                             <SimpleTooltip
                                 content="This project was created in the last week!"
                                 side="bottom"
@@ -180,24 +185,41 @@ const Project = ({
                                     New!
                                 </Badge>
                             </SimpleTooltip>
+                        ) : (
+                            recentlyUpdated && (
+                                <SimpleTooltip
+                                    content="This project was recently updated!"
+                                    side="bottom"
+                                >
+                                    <Badge
+                                        className="absolute top-2 left-2 bg-muted/70 backdrop-blur-sm border border-border/85 z-10"
+                                        variant="secondary"
+                                    >
+                                        <Clock className="size-4 text-primary font-bold" />
+                                        Recently Updated!
+                                    </Badge>
+                                </SimpleTooltip>
+                            )
                         )}
 
                         {/* Social Preview */}
-                        <div className="relative h-[12rem]">
-                            <Image
-                                className="p-1 object-cover rounded-t-lg"
-                                src={project.socialImageUrl}
-                                alt={project.name}
-                                priority
-                                fill
-                                draggable={false}
-                            />
+                        <div className="p-1 h-[12rem]">
+                            <div className="relative h-full w-full overflow-hidden">
+                                <Image
+                                    className="object-cover rounded-t-lg group-hover:scale-105 transition-all duration-300 transform-gpu"
+                                    src={project.socialImageUrl}
+                                    alt={project.name}
+                                    priority
+                                    fill
+                                    draggable={false}
+                                />
+                            </div>
                         </div>
 
                         <div className="p-4 h-full flex flex-col">
                             {/* Repository Name & Pin Badge */}
                             <div className="flex justify-between gap-1.5 items-center">
-                                <h3 className="text-xl font-semibold">
+                                <h3 className="inline-flex gap-1 items-center text-xl font-semibold">
                                     {project.name}
                                 </h3>
                                 {project.isPinned && (

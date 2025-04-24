@@ -34,7 +34,7 @@ export default function GithubCommitGraph() {
     const { isLoading, data: contributionsData } =
         useQuery<GithubContributionsResponse>({
             queryKey: ["github-contributions"],
-            queryFn: () => getGitHubContributions(),
+            queryFn: getGitHubContributions,
         });
 
     const { weeks, monthPositions, dayLabels } = generateCalendarData(

@@ -13,6 +13,13 @@ export const env = createEnv({
         // Analytics
         ANALYTICS_HOST: z.string(),
         ANALYTICS_ID: z.string(),
+
+        // MinIO
+        MINIO_ENDPOINT: z.string(),
+        MINIO_PORT: z.string(),
+        MINIO_USE_SSL: z.string(),
+        MINIO_ACCESS_KEY: z.string(),
+        MINIO_SECRET_KEY: z.string(),
     },
 
     client: {
@@ -32,6 +39,13 @@ export const env = createEnv({
         // Analytics
         ANALYTICS_HOST: process.env.ANALYTICS_HOST,
         ANALYTICS_ID: process.env.ANALYTICS_ID,
+
+        // MinIO
+        MINIO_ENDPOINT: process.env.MINIO_ENDPOINT,
+        MINIO_PORT: process.env.MINIO_PORT,
+        MINIO_USE_SSL: process.env.MINIO_USE_SSL,
+        MINIO_ACCESS_KEY: process.env.MINIO_ACCESS_KEY,
+        MINIO_SECRET_KEY: process.env.MINIO_SECRET_KEY,
     },
 
     /**
