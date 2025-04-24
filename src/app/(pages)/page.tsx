@@ -18,7 +18,7 @@ const LandingPage = (): ReactElement => (
         <Sidebar />
 
         {/* Content */}
-        <div className="relative w-full px-7 lg:px-10 xl:px-16 pt-40 lg:pt-32 flex flex-col transition-all transform-gpu overflow-hidden">
+        <div className="relative w-full px-7 lg:px-10 xl:px-16 flex flex-col transition-all transform-gpu overflow-hidden">
             <AboutSection />
             <ProjectsSection />
             <ActivitySection />

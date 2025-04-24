@@ -12,7 +12,7 @@ import { InfiniteMovingCards } from "~/components/ui/infinite-moving-cards";
 import { type Skill, type SocialConfig } from "~/types/app-config";
 
 const AboutSection = (): ReactElement => (
-    <section id="about" className="flex flex-col gap-4">
+    <section id="about" className="pt-40 lg:pt-32 flex flex-col gap-4">
         {/* Hire Me */}
         <Link
             className="w-fit"
