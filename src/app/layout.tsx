@@ -3,7 +3,6 @@ import { Roboto } from "next/font/google";
 import Script from "next/script";
 import { ReactNode } from "react";
 import Background from "~/components/background";
-import HeroPattern from "~/components/hero-pattern";
 import Navbar from "~/components/navbar";
 import OnekoKitty from "~/components/oneko-kitty";
 import RoundedCursor from "~/components/rounded-cursor";
@@ -57,7 +56,6 @@ const RootLayout = ({
             <AppProviders>
                 <div className="relative min-h-screen">
                     {/* Backgrounds */}
-                    <HeroPattern />
                     <Background />
 
                     {/* Kitty! */}
