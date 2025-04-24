@@ -225,7 +225,7 @@ const KittyToggle = (): ReactElement => {
     return (
         <Button
             className={cn(
-                "size-8 rounded-xl hover:bg-zinc-900/55 transition-all transform-gpu",
+                "hidden md:block size-8 rounded-xl hover:bg-zinc-900/55 transition-all transform-gpu",
                 showKitty && "bg-zinc-900/55 text-primary/85 hover:text-primary"
             )}
             variant="ghost"
