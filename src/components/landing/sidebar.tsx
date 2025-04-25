@@ -8,6 +8,7 @@ import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser, useTetherWS } from "use-tether";
 import { appConfig } from "~/app/config";
 import SimpleTooltip from "~/components/simple-tooltip";
+import { Separator } from "~/components/ui/separator";
 import { capitalizeWords, truncateText } from "~/lib/string";
 import { cn } from "~/lib/utils";
 
@@ -49,9 +50,15 @@ const Sidebar = (): ReactElement => {
             )}
         >
             {/* Content */}
-            <div className="h-full lg:-ml-7 flex flex-col gap-4 justify-between items-center">
+            <div className="h-full lg:-ml-7 flex flex-col gap-6 items-center">
                 <Introduction discordUser={discordUser} />
                 <SpotifyStatus discordUser={discordUser} />
+
+                {/* Footer */}
+                <div className="w-[calc(100%-6rem)] mt-auto">
+                    <Separator className="w-full" />
+                    Footer
+                </div>
             </div>
         </div>
     );
@@ -126,7 +133,7 @@ const Introduction = ({
                         className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 rounded-lg"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
                     >
                         <Icon className={cn("size-3.5", indicator.color)} />
                         <span className="text-xs text-muted-foreground">
@@ -174,10 +181,10 @@ const SpotifyStatus = ({
 
     return (
         <motion.div
-            className="w-[calc(100%-2rem)] lg:w-[calc(100%-5rem)] px-2 py-1.5 bg-muted/15 border border-border rounded-lg"
-            initial={{ opacity: 0, y: 20 }}
+            className="w-[calc(100%-5rem)] px-2 py-1.5 bg-muted/15 border border-border rounded-lg"
+            initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
         >
             <Link
                 className="w-full flex gap-2.5 items-center hover:opacity-75 transition-opacity transform-gpu"
@@ -227,5 +234,4 @@ const SpotifyStatus = ({
         </motion.div>
     );
 };
-
 export default Sidebar;
