@@ -7,7 +7,8 @@ import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser, useTetherWS } from "use-tether";
 import { appConfig } from "~/app/config";
-import { truncateText } from "~/lib/string";
+import SimpleTooltip from "~/components/simple-tooltip";
+import { capitalizeWords, truncateText } from "~/lib/string";
 import { cn } from "~/lib/utils";
 
 type Indicator = {
@@ -61,6 +62,9 @@ const Introduction = ({
 }: {
     discordUser: DiscordUser | undefined;
 }): ReactElement => {
+    const formattedStatus: string | undefined = discordUser
+        ? capitalizeWords(discordUser?.onlineStatus.replaceAll("_", " "))
+        : undefined;
     const indicator: Indicator =
         indicators[discordUser?.onlineStatus ?? "OFFLINE"];
     const Icon: LucideIcon = indicator.icon;
@@ -101,17 +105,36 @@ const Introduction = ({
             </motion.h1>
 
             {/* Online Status & Bio */}
-            <motion.div
-                className="flex gap-2.5 items-center"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-            >
-                <Icon className={indicator.color} />
-                <span className="text-sm text-muted-foreground">
-                    {discordUser?.onlineStatus}
-                </span>
-            </motion.div>
+            {discordUser && (
+                <SimpleTooltip
+                    content={
+                        <span className="flex gap-1 items-center">
+                            <Image
+                                className="pr-0.5"
+                                src="/media/discord.png"
+                                alt="Discord"
+                                width={15}
+                                height={15}
+                                draggable={false}
+                            />
+                            Currently on <b>{formattedStatus}</b>
+                        </span>
+                    }
+                    side="bottom"
+                >
+                    <motion.div
+                        className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 rounded-lg"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
+                        <Icon className={cn("size-3.5", indicator.color)} />
+                        <span className="text-xs text-muted-foreground">
+                            {formattedStatus}
+                        </span>
+                    </motion.div>
+                </SimpleTooltip>
+            )}
         </div>
     );
 };
