@@ -9,7 +9,6 @@ import HomelabSection from "~/components/landing/sections/homelab-section";
 import MediaSection from "~/components/landing/sections/media-section";
 import ProjectsSection from "~/components/landing/sections/projects-section";
 import Sidebar from "~/components/landing/sidebar";
-import { Particles } from "~/components/magicui/particles";
 
 const LandingPage = (): ReactElement => {
     // Get my Discord user to display the status indicator and some other cool stuff
@@ -23,11 +22,6 @@ const LandingPage = (): ReactElement => {
 
             {/* Content */}
             <div className="relative w-full px-7 lg:px-10 xl:px-16 flex flex-col transition-all transform-gpu overflow-hidden">
-                <Particles
-                    className="absolute inset-0 z-0 opacity-35"
-                    ease={80}
-                    refresh
-                />
                 <AboutSection discordUser={discordUser} />
                 <ProjectsSection />
                 <ActivitySection />
