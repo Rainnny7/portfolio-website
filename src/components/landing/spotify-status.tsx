@@ -1,4 +1,3 @@
-import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
@@ -39,12 +38,7 @@ const SpotifyStatus = ({
     if (!spotify) return undefined;
 
     return (
-        <motion.div
-            className="w-[calc(100%-5rem)] px-2 py-1.5 bg-muted/15 border border-border rounded-lg"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-        >
+        <div className="px-2 py-1.5 bg-muted/15 border border-border rounded-lg">
             <Link
                 className="w-full flex gap-2.5 items-center hover:opacity-75 transition-opacity transform-gpu"
                 href={spotify.trackUrl}
@@ -90,7 +84,7 @@ const SpotifyStatus = ({
                     </div>
                 </div>
             </Link>
-        </motion.div>
+        </div>
     );
 };
 export default SpotifyStatus;

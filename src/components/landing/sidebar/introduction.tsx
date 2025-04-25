@@ -112,5 +112,4 @@ const SidebarIntroduction = ({
         </div>
     );
 };
-
 export default SidebarIntroduction;

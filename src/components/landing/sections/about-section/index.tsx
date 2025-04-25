@@ -8,7 +8,7 @@ import { DiscordUser } from "use-tether";
 import { appConfig } from "~/app/config";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
 import AboutSkill from "~/components/landing/sections/about-section/skill";
-import AboutSocialLink from "~/components/landing/sections/about-section/social-link";
+import SocialLink from "~/components/landing/social-link";
 import SpotifyStatus from "~/components/landing/spotify-status";
 import { InfiniteMovingCards } from "~/components/ui/infinite-moving-cards";
 import { type Skill, type SocialConfig } from "~/types/app-config";
@@ -63,11 +63,18 @@ const AboutSection = ({
             <div className="flex gap-2 items-center">
                 {Object.values(appConfig.socials).map(
                     (social: SocialConfig, index: number) => (
-                        <AboutSocialLink
+                        <motion.div
                             key={social.href}
-                            social={social}
-                            index={index}
-                        />
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-100px" }}
+                            transition={{
+                                duration: 0.5,
+                                delay: 0.3 + index * 0.1,
+                            }}
+                        >
+                            <SocialLink social={social} />
+                        </motion.div>
                     )
                 )}
             </div>
@@ -108,8 +115,7 @@ const AboutSection = ({
         <motion.div
             className="max-w-md lg:hidden"
             initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ margin: "-100px" }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
         >
             <SpotifyStatus discordUser={discordUser} />
