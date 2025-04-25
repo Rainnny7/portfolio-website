@@ -51,7 +51,7 @@ const AboutSection = (): ReactElement => (
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: 0.2 }}
             >
-                Full Stack Software Engineer
+                Full Stack Software Engineer & System Administrator
             </motion.p>
 
             {/* Socials */}
