@@ -8,7 +8,7 @@ import {
     getRepositories,
     GithubProjectResponse,
 } from "~/actions/get-github-repos";
-import LandingSection from "~/components/landing/sections/landing-section";
+import LandingSection from "~/components/landing/landing-section";
 import Project from "~/components/landing/sections/projects-section/project";
 import PaginationControls from "~/components/pagination-controls";
 import { Skeleton } from "~/components/ui/skeleton";
@@ -44,7 +44,14 @@ const ProjectsSection = (): ReactElement => {
         <LandingSection
             id="projects"
             icon={Briefcase}
-            title="My Projects"
+            title={
+                <span>
+                    My{" "}
+                    <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
+                        Projects
+                    </span>
+                </span>
+            }
             description="Here are some of the projects I've worked on!"
         >
             {/* Projects */}

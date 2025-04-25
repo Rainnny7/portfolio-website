@@ -2,14 +2,21 @@
 
 import { Activity } from "lucide-react";
 import { motion } from "motion/react";
+import LandingSection from "~/components/landing/landing-section";
 import GithubCommitGraph from "~/components/landing/sections/activity-section/github-commit-graph";
-import LandingSection from "~/components/landing/sections/landing-section";
 
 const ActivitySection = () => (
     <LandingSection
         id="activity"
         icon={Activity}
-        title="My Activity"
+        title={
+            <span>
+                My{" "}
+                <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
+                    Activity
+                </span>
+            </span>
+        }
         description="This is a little graph of what I've been up to on GitHub this year."
     >
         <motion.div

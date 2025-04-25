@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Image } from "lucide-react";
 import { motion } from "motion/react";
 import { getMedia } from "~/actions/get-minio-media";
-import LandingSection from "~/components/landing/sections/landing-section";
+import LandingSection from "~/components/landing/landing-section";
 
 const MediaSection = () => {
     const { isLoading, data: media } = useQuery({
@@ -17,7 +17,14 @@ const MediaSection = () => {
         <LandingSection
             id="media"
             icon={Image}
-            title="My Media"
+            title={
+                <span>
+                    My{" "}
+                    <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
+                        Media
+                    </span>
+                </span>
+            }
             description="This is just a bunch of random media of things I've made throughout the years, enjoy!"
         >
             <motion.p

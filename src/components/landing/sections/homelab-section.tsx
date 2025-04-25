@@ -2,13 +2,20 @@
 
 import { Server } from "lucide-react";
 import { motion } from "motion/react";
-import LandingSection from "~/components/landing/sections/landing-section";
+import LandingSection from "~/components/landing/landing-section";
 
 const HomelabSection = () => (
     <LandingSection
         id="homelab"
         icon={Server}
-        title="My Homelab"
+        title={
+            <span>
+                My{" "}
+                <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
+                    Homelab
+                </span>
+            </span>
+        }
         description="This is my homelab so far, it hosts all my services, including this website! I work on it in my spare time when I can (:"
     >
         <motion.ul

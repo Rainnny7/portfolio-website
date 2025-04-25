@@ -24,7 +24,7 @@ type LandingSectionProps = {
     /**
      * The title of the section.
      */
-    title: string;
+    title: string | ReactNode;
 
     /**
      * The duration delay for the title.
