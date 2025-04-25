@@ -6,7 +6,7 @@ import Background from "~/components/background";
 import Navbar from "~/components/navbar";
 import OnekoKitty from "~/components/oneko-kitty";
 import RoundedCursor from "~/components/rounded-cursor";
-import { env } from "~/lib/env";
+import { env, isProd } from "~/lib/env";
 import { cn } from "~/lib/utils";
 import AppProviders from "~/provider/app-providers";
 import "./styles/globals.css";
@@ -48,11 +48,13 @@ const RootLayout = ({
                 roboto.className
             )}
         >
-            <Script
-                src={`${env.ANALYTICS_HOST}/script.js`}
-                data-website-id={env.ANALYTICS_ID}
-                defer
-            />
+            {isProd && (
+                <Script
+                    src={`${env.ANALYTICS_HOST}/script.js`}
+                    data-website-id={env.ANALYTICS_ID}
+                    defer
+                />
+            )}
             <AppProviders>
                 <div className="relative min-h-screen">
                     {/* Backgrounds */}
