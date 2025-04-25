@@ -2,13 +2,12 @@
 
 import { Briefcase } from "lucide-react";
 import { motion } from "motion/react";
-import { Link } from "next-view-transitions";
-import Image from "next/image";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 import { appConfig } from "~/app/config";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
-import SimpleTooltip from "~/components/simple-tooltip";
+import AboutSkill from "~/components/landing/sections/about-section/skill";
+import AboutSocialLink from "~/components/landing/sections/about-section/social-link";
 import { InfiniteMovingCards } from "~/components/ui/infinite-moving-cards";
 import { type Skill, type SocialConfig } from "~/types/app-config";
 
@@ -58,7 +57,7 @@ const AboutSection = (): ReactElement => (
             <div className="flex gap-2 items-center">
                 {Object.values(appConfig.socials).map(
                     (social: SocialConfig, index: number) => (
-                        <SocialLink
+                        <AboutSocialLink
                             key={social.href}
                             social={social}
                             index={index}
@@ -94,96 +93,10 @@ const AboutSection = (): ReactElement => (
         >
             <InfiniteMovingCards>
                 {appConfig.skills.map((skill: Skill, index: number) => (
-                    <Skill key={skill.name} skill={skill} index={index} />
+                    <AboutSkill key={skill.name} skill={skill} index={index} />
                 ))}
             </InfiniteMovingCards>
         </motion.div>
     </section>
 );
-
-const SocialLink = ({
-    social,
-    index,
-}: {
-    social: SocialConfig;
-    index: number;
-}): ReactElement => {
-    const LinkComponent = social.href.startsWith("http") ? Link : NextLink;
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{
-                duration: 0.5,
-                delay: 0.3 + index * 0.1,
-            }}
-        >
-            <SimpleTooltip content={social.tooltip} side="bottom">
-                <LinkComponent
-                    className="px-2.5 py-1.5 flex gap-2 items-center text-sm text-white/85 bg-background/80 border border-border rounded-xl hover:bg-zinc-900/55 transition-colors transform-gpu"
-                    href={social.href}
-                    target={
-                        social.href.startsWith("http") ? "_blank" : undefined
-                    }
-                    draggable={false}
-                >
-                    {typeof social.icon === "string" ? (
-                        <Image
-                            src={social.icon}
-                            alt={`${social.name} Icon`}
-                            width={16}
-                            height={12}
-                            draggable={false}
-                        />
-                    ) : (
-                        <social.icon className="size-4" />
-                    )}
-                    <span>{social.name}</span>
-                </LinkComponent>
-            </SimpleTooltip>
-        </motion.div>
-    );
-};
-
-const Skill = ({
-    skill,
-    index,
-}: {
-    skill: Skill;
-    index: number;
-}): ReactElement => (
-    <motion.div
-        variants={{
-            hidden: { opacity: 0, scale: 0.8 },
-            visible: {
-                opacity: 1,
-                scale: 1,
-                transition: {
-                    delay: 0.5 + index * 0.07,
-                    duration: 0.3,
-                    ease: "easeOut",
-                },
-            },
-        }}
-    >
-        <SimpleTooltip content={skill.name} side="bottom">
-            <Link
-                className="flex items-center gap-2 hover:opacity-75 transition-opacity transform-gpu"
-                href={skill.link}
-                target="_blank"
-                draggable={false}
-            >
-                <Image
-                    src={skill.icon}
-                    alt={skill.name}
-                    width={32}
-                    height={32}
-                    draggable={false}
-                />
-            </Link>
-        </SimpleTooltip>
-    </motion.div>
-);
-
 export default AboutSection;

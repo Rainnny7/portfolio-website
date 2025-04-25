@@ -1,5 +1,6 @@
 import dayjs, { Dayjs } from "dayjs";
 import { Github, Mail } from "lucide-react";
+import SimpleTooltip from "~/components/simple-tooltip";
 import { AppConfig } from "~/types/app-config";
 
 const birthDate: Dayjs = dayjs("2002-11-13");
@@ -30,9 +31,16 @@ export const appConfig: AppConfig = {
     about: (
         <span>
             A passionate{" "}
-            <b className="text-primary/90">
-                {dayjs().diff(birthDate, "year")} year old
-            </b>{" "}
+            <SimpleTooltip
+                content={`My human uptime is ${dayjs().diff(
+                    birthDate,
+                    "second"
+                )} seconds (:`}
+            >
+                <b className="text-primary/90 hover:text-primary transition-colors transform-gpu">
+                    {dayjs().diff(birthDate, "year")} year old
+                </b>
+            </SimpleTooltip>{" "}
             software engineer living in Toronto, Canada. I primarily work with
             the Java programming language and have{" "}
             <b className="text-primary/90">

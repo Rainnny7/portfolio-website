@@ -7,16 +7,8 @@ import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser, useTetherWS } from "use-tether";
 import { appConfig } from "~/app/config";
-import SimpleTooltip from "~/components/simple-tooltip";
-import {
-    Sheet,
-    SheetContent,
-    SheetHeader,
-    SheetTitle,
-} from "~/components/ui/sheet";
-import { capitalizeWords, truncateText } from "~/lib/string";
+import { truncateText } from "~/lib/string";
 import { cn } from "~/lib/utils";
-import { useSidebar } from "~/provider/sidebar-provider";
 
 type Indicator = {
     icon: LucideIcon;
@@ -56,43 +48,13 @@ const Sidebar = (): ReactElement => {
             )}
         >
             {/* Content */}
-            <SidebarContent discordUser={discordUser} />
-            <MobileSidebar discordUser={discordUser} />
+            <div className="h-full lg:-ml-7 flex flex-col gap-4 justify-between items-center">
+                <Introduction discordUser={discordUser} />
+                <SpotifyStatus discordUser={discordUser} />
+            </div>
         </div>
     );
 };
-
-const MobileSidebar = ({
-    discordUser,
-}: {
-    discordUser: DiscordUser | undefined;
-}): ReactElement => {
-    const { open, setOpen } = useSidebar();
-    return (
-        <Sheet open={open} onOpenChange={setOpen}>
-            <SheetContent
-                className="w-[17.5rem] pb-7 bg-background"
-                side="left"
-            >
-                <SheetHeader>
-                    <SheetTitle />
-                </SheetHeader>
-                <SidebarContent discordUser={discordUser} />
-            </SheetContent>
-        </Sheet>
-    );
-};
-
-const SidebarContent = ({
-    discordUser,
-}: {
-    discordUser: DiscordUser | undefined;
-}): ReactElement => (
-    <div className="h-full lg:-ml-7 flex flex-col gap-4 justify-between items-center">
-        <Introduction discordUser={discordUser} />
-        <SpotifyStatus discordUser={discordUser} />
-    </div>
-);
 
 const Introduction = ({
     discordUser,
@@ -106,7 +68,6 @@ const Introduction = ({
         <div className="flex flex-col gap-4 items-center">
             {/* Introduction */}
             <motion.div
-                className="relative"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.1 }}
@@ -120,47 +81,9 @@ const Introduction = ({
                     priority
                     draggable={false}
                 />
-
-                {/* Status Indicator */}
-                {Icon && (
-                    <SimpleTooltip
-                        content={
-                            discordUser && (
-                                <span className="flex gap-1 items-center">
-                                    <Image
-                                        className="pr-0.5"
-                                        src="/media/discord.png"
-                                        alt="Discord"
-                                        width={15}
-                                        height={15}
-                                        draggable={false}
-                                    />
-                                    Currently on{" "}
-                                    <b>
-                                        {capitalizeWords(
-                                            discordUser?.onlineStatus.replaceAll(
-                                                "_",
-                                                " "
-                                            )
-                                        )}
-                                    </b>
-                                </span>
-                            )
-                        }
-                        side="bottom"
-                    >
-                        <Icon
-                            className={cn(
-                                "absolute -bottom-1 right-3.5 p-1 size-6 bg-background rounded-full",
-                                discordUser &&
-                                    "hover:opacity-90 transition-opacity transform-gpu",
-                                indicator.color
-                            )}
-                        />
-                    </SimpleTooltip>
-                )}
             </motion.div>
 
+            {/* Name */}
             <motion.h1
                 className="flex gap-2.5 items-center"
                 initial={{ opacity: 0, y: -20 }}
@@ -176,6 +99,19 @@ const Introduction = ({
                 />
                 <span className="text-xl font-bold">Hi, I&apos;m Braydon!</span>
             </motion.h1>
+
+            {/* Online Status & Bio */}
+            <motion.div
+                className="flex gap-2.5 items-center"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                <Icon className={indicator.color} />
+                <span className="text-sm text-muted-foreground">
+                    {discordUser?.onlineStatus}
+                </span>
+            </motion.div>
         </div>
     );
 };

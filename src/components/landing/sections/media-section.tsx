@@ -10,7 +10,7 @@ const MediaSection = () => {
         queryKey: ["media"],
         queryFn: getMedia,
     });
-    console.log(media);
+    console.log(isLoading, media);
 
     return (
         <section id="media" className="py-40 flex flex-col gap-5">

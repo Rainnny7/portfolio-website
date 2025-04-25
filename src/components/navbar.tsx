@@ -7,7 +7,6 @@ import {
     Home,
     Image,
     LucideIcon,
-    PanelLeft,
     Server,
     User,
 } from "lucide-react";
@@ -18,10 +17,8 @@ import { ReactElement, useEffect, useState } from "react";
 import { toast } from "sonner";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
-import { Separator } from "~/components/ui/separator";
 import { cn } from "~/lib/utils";
 import { useKitty } from "~/provider/kitty-provider";
-import { useSidebar } from "~/provider/sidebar-provider";
 
 type NavbarLink = {
     name?: string | undefined;
@@ -76,7 +73,6 @@ const links: NavbarLink[] = [
 
 const Navbar = (): ReactElement => {
     const path: string = usePathname();
-    const { open, setOpen } = useSidebar();
     const [activeSection, setActiveSection] = useState<string>("about");
     const [hasScrolled, setHasScrolled] = useState<boolean>(false);
 
@@ -135,26 +131,6 @@ const Navbar = (): ReactElement => {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.6 }}
         >
-            {/* Mobile Sidebar Button */}
-            <div className="lg:hidden flex items-center gap-1">
-                <SimpleTooltip content="Open sidebar" side="bottom">
-                    <Button
-                        className="size-8 hover:bg-zinc-900/55 rounded-xl"
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => setOpen(!open)}
-                    >
-                        <PanelLeft className="size-4" />
-                    </Button>
-                </SimpleTooltip>
-                <Separator
-                    orientation="vertical"
-                    style={{
-                        height: "1.5rem",
-                    }}
-                />
-            </div>
-
             {/* Links */}
             {links.map((link: NavbarLink, index: number) => {
                 const active: boolean =

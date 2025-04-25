@@ -2,7 +2,7 @@
 
 import { Activity } from "lucide-react";
 import { motion } from "motion/react";
-import GithubCommitGraph from "~/components/landing/github-commit-graph";
+import GithubCommitGraph from "~/components/landing/sections/activity-section/github-commit-graph";
 
 const ActivitySection = () => (
     <section id="activity" className="pt-40 flex flex-col gap-5">
