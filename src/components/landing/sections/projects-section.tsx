@@ -293,19 +293,21 @@ const Project = ({
                             </p>
 
                             {/* Tags */}
-                            {project.tags && (
-                                <InfiniteMovingCards speed={50}>
-                                    {project.tags.map((tag) => (
-                                        <Badge
-                                            key={tag}
-                                            className="text-xs text-white/85"
-                                            variant="secondary"
-                                        >
-                                            {tag}
-                                        </Badge>
-                                    ))}
-                                </InfiniteMovingCards>
-                            )}
+                            <div className="min-h-[3.5rem]">
+                                {project.tags && (
+                                    <InfiniteMovingCards speed={50}>
+                                        {project.tags.map((tag) => (
+                                            <Badge
+                                                key={tag}
+                                                className="text-xs text-white/85"
+                                                variant="secondary"
+                                            >
+                                                {tag}
+                                            </Badge>
+                                        ))}
+                                    </InfiniteMovingCards>
+                                )}
+                            </div>
                         </div>
                     </MagicCard>
                 </Link>
