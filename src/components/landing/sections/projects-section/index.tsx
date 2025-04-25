@@ -8,6 +8,7 @@ import {
     getRepositories,
     GithubProjectResponse,
 } from "~/actions/get-github-repos";
+import LandingSection from "~/components/landing/sections/landing-section";
 import Project from "~/components/landing/sections/projects-section/project";
 import PaginationControls from "~/components/pagination-controls";
 import { Skeleton } from "~/components/ui/skeleton";
@@ -40,30 +41,13 @@ const ProjectsSection = (): ReactElement => {
     }, [page, githubResponse]);
 
     return (
-        <section id="projects" className="pt-40 flex flex-col gap-4">
-            {/* Header */}
-            <div className="flex flex-col gap-2">
-                <motion.h2
-                    className="text-4xl font-bold flex gap-4 items-center"
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
-                >
-                    <Briefcase className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
-                    My Projects
-                </motion.h2>
-                <motion.p
-                    className="max-w-lg text-lg text-muted-foreground font-light"
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
-                >
-                    Here are some of the projects I&apos;ve worked on.
-                </motion.p>
-            </div>
-
+        <LandingSection
+            id="projects"
+            className="pt-40 flex flex-col gap-4"
+            icon={Briefcase}
+            title="My Projects"
+            description="Here are some of the projects I've worked on!"
+        >
             {/* Projects */}
             {isLoading ? (
                 // Loading state
@@ -119,7 +103,7 @@ const ProjectsSection = (): ReactElement => {
                     </motion.div>
                 </div>
             )}
-        </section>
+        </LandingSection>
     );
 };
 export default ProjectsSection;

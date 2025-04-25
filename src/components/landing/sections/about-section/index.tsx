@@ -2,6 +2,7 @@
 
 import { Briefcase } from "lucide-react";
 import { motion } from "motion/react";
+import Image from "next/image";
 import NextLink from "next/link";
 import { ReactElement } from "react";
 import { DiscordUser } from "use-tether";
@@ -41,19 +42,38 @@ const AboutSection = ({
         {/* Name, Title, & Socials */}
         <div className="flex flex-col gap-2.5">
             <motion.h1
-                className="text-5xl font-bold"
+                className="flex gap-3 lg:gap-2.5 items-center text-4xl sm:text-5xl font-bold"
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
-                I&apos;m{" "}
-                <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
-                    Braydon
+                <Image
+                    className="hidden xs:block lg:hidden"
+                    src="/media/wave.gif"
+                    alt="Waving Hand"
+                    width={38}
+                    height={38}
+                    draggable={false}
+                />
+                <span className="lg:hidden">Hi, </span>I&apos;m{" "}
+                <span className="flex items-center gap-2.5">
+                    <Image
+                        className="lg:hidden rounded-full aspect-square object-cover"
+                        src="/media/me.png"
+                        alt="Hey, it's me!"
+                        width={40}
+                        height={40}
+                        priority
+                        draggable={false}
+                    />
+                    <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
+                        Braydon
+                    </span>
                 </span>
             </motion.h1>
             <motion.p
-                className="text-lg font-light text-muted-foreground"
+                className="sm:text-lg font-light text-muted-foreground"
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
@@ -85,7 +105,7 @@ const AboutSection = ({
 
         {/* About Me */}
         <motion.p
-            className="max-w-xl text-lg font-light text-muted-foreground"
+            className="max-w-xl sm:text-lg font-light text-muted-foreground"
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
