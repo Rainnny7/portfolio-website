@@ -4,14 +4,20 @@ import { Briefcase } from "lucide-react";
 import { motion } from "motion/react";
 import NextLink from "next/link";
 import { ReactElement } from "react";
+import { DiscordUser } from "use-tether";
 import { appConfig } from "~/app/config";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
 import AboutSkill from "~/components/landing/sections/about-section/skill";
 import AboutSocialLink from "~/components/landing/sections/about-section/social-link";
+import SpotifyStatus from "~/components/landing/spotify-status";
 import { InfiniteMovingCards } from "~/components/ui/infinite-moving-cards";
 import { type Skill, type SocialConfig } from "~/types/app-config";
 
-const AboutSection = (): ReactElement => (
+const AboutSection = ({
+    discordUser,
+}: {
+    discordUser: DiscordUser | undefined;
+}): ReactElement => (
     <section id="about" className="pt-40 lg:pt-32 flex flex-col gap-4">
         {/* Hire Me */}
         <NextLink
@@ -96,6 +102,16 @@ const AboutSection = (): ReactElement => (
                     <AboutSkill key={skill.name} skill={skill} index={index} />
                 ))}
             </InfiniteMovingCards>
+        </motion.div>
+
+        {/* Spotify Status - Mobile */}
+        <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+        >
+            <SpotifyStatus discordUser={discordUser} />
         </motion.div>
     </section>
 );
