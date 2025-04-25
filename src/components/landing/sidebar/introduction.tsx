@@ -84,7 +84,7 @@ const SidebarIntroduction = ({
     const Icon: LucideIcon = indicator.icon;
 
     return (
-        <div className="flex flex-col gap-4 items-center">
+        <div className="flex flex-col gap-3.5 items-center">
             {/* Introduction */}
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
@@ -120,7 +120,7 @@ const SidebarIntroduction = ({
             </motion.h1>
 
             {/* Online Status & Timezone */}
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5 items-center">
                 {discordUser && (
                     <SimpleTooltip
                         content={
@@ -136,16 +136,16 @@ const SidebarIntroduction = ({
                                 Currently on <b>{formattedStatus}</b>
                             </span>
                         }
-                        side="bottom"
+                        side="right"
                     >
                         <motion.div
-                            className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 rounded-lg"
+                            className="group flex gap-2 items-center"
                             initial={{ opacity: 0, y: -20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.5, delay: 0.3 }}
                         >
                             <Icon className={cn("size-3.5", indicator.color)} />
-                            <span className="text-xs text-muted-foreground">
+                            <span className="text-xs text-muted-foreground group-hover:opacity-90 transition-opacity transform-gpu">
                                 {formattedStatus}
                             </span>
                         </motion.div>
@@ -153,17 +153,27 @@ const SidebarIntroduction = ({
                 )}
 
                 {/* Timezone */}
-                <motion.div
-                    className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 text-xs text-muted-foreground rounded-lg"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
+                <SimpleTooltip
+                    content={
+                        <>
+                            It&apos;s currently <b>{timeInfo.time} EST</b> for
+                            me! ({timeInfo.difference})
+                        </>
+                    }
+                    side="right"
                 >
-                    <Clock className="size-3.5 text-primary" />
-                    <span>
-                        {timeInfo.time} EST ({timeInfo.difference})
-                    </span>
-                </motion.div>
+                    <motion.div
+                        className="group flex gap-2 items-center"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.75 }}
+                    >
+                        <Clock className="size-3.5 text-primary" />
+                        <span className="text-xs text-muted-foreground group-hover:opacity-90 transition-opacity transform-gpu">
+                            {timeInfo.time} EST ({timeInfo.difference})
+                        </span>
+                    </motion.div>
+                </SimpleTooltip>
             </div>
         </div>
     );

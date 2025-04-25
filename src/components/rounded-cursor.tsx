@@ -38,7 +38,7 @@ const RoundedCursor = (): ReactElement | undefined => {
 
             // Use transform for smooth movement
             if (ref.current) {
-                const scale = clickable ? 1.15 : 1;
+                const scale = clickable ? 1 : 1;
                 ref.current.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%) scale(${scale})`;
             }
 

@@ -48,7 +48,7 @@ const AboutSection = ({
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
                 I&apos;m{" "}
-                <span className="bg-gradient-to-br from-primary to-red-500/85 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
                     Braydon
                 </span>
             </motion.h1>
