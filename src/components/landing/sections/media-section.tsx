@@ -11,7 +11,7 @@ const MediaSection = () => {
         queryKey: ["media"],
         queryFn: getMedia,
     });
-    console.log(isLoading, media);
+    // console.log(isLoading, media);
 
     return (
         <LandingSection
