@@ -91,7 +91,7 @@ const LandingSection = ({
         </div>
 
         {/* Content */}
-        <div className="flex gap-1">{children}</div>
+        <div>{children}</div>
     </section>
 );
 export default LandingSection;
