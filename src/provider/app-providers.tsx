@@ -7,6 +7,7 @@ import { appConfig } from "~/app/config";
 import { Toaster } from "~/components/ui/sonner";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import KittyProvider from "~/provider/kitty-provider";
+import ThemeProvider from "~/provider/theme-provider";
 
 const queryClient = new QueryClient();
 
@@ -41,24 +42,30 @@ const AppProviders = ({ children }: { children: ReactNode }) => {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <TooltipProvider delayDuration={100}>
-                <ViewTransitions>
-                    <KittyProvider>
-                        {children}
-                        <Toaster
-                            position="bottom-center"
-                            toastOptions={{
-                                classNames: {
-                                    toast: "!min-w-[16rem] !w-fit !flex !justify-center !items-center !gap-2 !bg-background/75 !backdrop-blur-md !border !border-border !rounded-3xl",
-                                    success: "!text-green-500",
-                                    error: "!text-red-500",
-                                    content: "!text-white/95",
-                                },
-                            }}
-                        />
-                    </KittyProvider>
-                </ViewTransitions>
-            </TooltipProvider>
+            <ViewTransitions>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="default"
+                    themes={["default", "blue"]}
+                >
+                    <TooltipProvider delayDuration={100}>
+                        <KittyProvider>
+                            {children}
+                            <Toaster
+                                position="bottom-center"
+                                toastOptions={{
+                                    classNames: {
+                                        toast: "!min-w-[16rem] !w-fit !flex !justify-center !items-center !gap-2 !bg-background/75 !backdrop-blur-md !border !border-border !rounded-3xl",
+                                        success: "!text-green-500",
+                                        error: "!text-red-500",
+                                        content: "!text-white/95",
+                                    },
+                                }}
+                            />
+                        </KittyProvider>
+                    </TooltipProvider>
+                </ThemeProvider>
+            </ViewTransitions>
         </QueryClientProvider>
     );
 };
