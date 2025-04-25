@@ -211,7 +211,7 @@ const KittyToggle = (): ReactElement => {
                 setShowKitty(!showKitty);
                 toast.success(
                     <span className="flex gap-1 items-center">
-                        Your kitty {showKitty ? "is now" : "is no-longer"}{" "}
+                        Your kitty {showKitty ? "is no-longer" : "is now"}{" "}
                         visible!
                         <Cat className="size-4" />
                     </span>
