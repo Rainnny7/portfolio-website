@@ -1,6 +1,5 @@
 "use client";
 
-import { Cat } from "lucide-react";
 import {
     createContext,
     ReactNode,
@@ -8,7 +7,6 @@ import {
     useEffect,
     useState,
 } from "react";
-import { toast } from "sonner";
 
 /**
  * The props for the kitty context.
@@ -51,15 +49,10 @@ const KittyProvider = ({ children }: { children: ReactNode }) => {
     }, []);
 
     // Save the kitty state to local storage when it changes
-    useEffect(() => {
-        localStorage.setItem("show-kitty", showKitty.toString());
-        toast.success(
-            <span className="flex gap-1 items-center">
-                Your kitty {showKitty ? "is now" : "is no-longer"} visible!
-                <Cat className="size-4" />
-            </span>
-        );
-    }, [showKitty]);
+    useEffect(
+        () => localStorage.setItem("show-kitty", showKitty.toString()),
+        [showKitty]
+    );
 
     return (
         <KittyContext.Provider value={{ showKitty, setShowKitty }}>

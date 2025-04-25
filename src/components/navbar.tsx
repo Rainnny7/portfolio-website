@@ -15,6 +15,7 @@ import { motion } from "motion/react";
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
+import { toast } from "sonner";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { Separator } from "~/components/ui/separator";
@@ -230,7 +231,16 @@ const KittyToggle = (): ReactElement => {
             )}
             variant="ghost"
             size="icon"
-            onClick={() => setShowKitty(!showKitty)}
+            onClick={() => {
+                setShowKitty(!showKitty);
+                toast.success(
+                    <span className="flex gap-1 items-center">
+                        Your kitty {showKitty ? "is now" : "is no-longer"}{" "}
+                        visible!
+                        <Cat className="size-4" />
+                    </span>
+                );
+            }}
         >
             <Cat className="size-4" />
         </Button>
