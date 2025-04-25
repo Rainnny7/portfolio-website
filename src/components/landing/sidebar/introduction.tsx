@@ -1,7 +1,7 @@
-import { Circle, CircleX, LucideIcon } from "lucide-react";
+import { Circle, CircleX, Clock, LucideIcon } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser } from "use-tether";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { capitalizeWords } from "~/lib/string";
@@ -15,7 +15,7 @@ type Indicator = {
 const indicators: Record<DiscordUser["onlineStatus"], Indicator> = {
     DO_NOT_DISTURB: {
         icon: CircleX,
-        color: "text-red-500",
+        color: "text-primary",
     },
     IDLE: {
         icon: Circle,
@@ -36,12 +36,53 @@ const SidebarIntroduction = ({
 }: {
     discordUser: DiscordUser | undefined;
 }): ReactElement => {
+    const [timeInfo, setTimeInfo] = useState<{
+        time: string;
+        difference: string;
+    }>({ time: "", difference: "" });
+
+    useEffect(() => {
+        const updateTime = () => {
+            // Calculate time difference in hours between EST and the user's timezone
+            const diffHours: number = Math.floor(
+                (new Date().getTime() -
+                    new Date(
+                        new Date().toLocaleString("en-US", {
+                            timeZone: "America/Toronto",
+                        })
+                    ).getTime()) /
+                    (1000 * 60 * 60)
+            );
+
+            // Get the current time in EST as well as the difference
+            setTimeInfo({
+                time: new Date().toLocaleString("en-US", {
+                    timeZone: "America/Toronto",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                    hour12: false,
+                }),
+                difference:
+                    diffHours === 0
+                        ? "Same Time"
+                        : `${Math.abs(diffHours)}h ${
+                              diffHours > 0 ? "ahead" : "behind"
+                          }`,
+            });
+        };
+        // Update immediately and then every minute
+        updateTime();
+        const interval = setInterval(updateTime, 60000);
+        return () => clearInterval(interval);
+    }, []);
+
     const formattedStatus: string | undefined = discordUser
         ? capitalizeWords(discordUser?.onlineStatus.replaceAll("_", " "))
         : undefined;
     const indicator: Indicator =
         indicators[discordUser?.onlineStatus ?? "OFFLINE"];
     const Icon: LucideIcon = indicator.icon;
+
     return (
         <div className="flex flex-col gap-4 items-center">
             {/* Introduction */}
@@ -78,37 +119,52 @@ const SidebarIntroduction = ({
                 <span className="text-xl font-bold">Hi, I&apos;m Braydon!</span>
             </motion.h1>
 
-            {/* Online Status & Bio */}
-            {discordUser && (
-                <SimpleTooltip
-                    content={
-                        <span className="flex gap-1 items-center">
-                            <Image
-                                className="pr-0.5"
-                                src="/media/discord.png"
-                                alt="Discord"
-                                width={15}
-                                height={15}
-                                draggable={false}
-                            />
-                            Currently on <b>{formattedStatus}</b>
-                        </span>
-                    }
-                    side="bottom"
-                >
-                    <motion.div
-                        className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 rounded-lg"
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
+            {/* Online Status & Timezone */}
+            <div className="flex flex-col gap-2">
+                {discordUser && (
+                    <SimpleTooltip
+                        content={
+                            <span className="flex gap-1 items-center">
+                                <Image
+                                    className="pr-0.5"
+                                    src="/media/discord.png"
+                                    alt="Discord"
+                                    width={15}
+                                    height={15}
+                                    draggable={false}
+                                />
+                                Currently on <b>{formattedStatus}</b>
+                            </span>
+                        }
+                        side="bottom"
                     >
-                        <Icon className={cn("size-3.5", indicator.color)} />
-                        <span className="text-xs text-muted-foreground">
-                            {formattedStatus}
-                        </span>
-                    </motion.div>
-                </SimpleTooltip>
-            )}
+                        <motion.div
+                            className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 rounded-lg"
+                            initial={{ opacity: 0, y: -20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.5, delay: 0.3 }}
+                        >
+                            <Icon className={cn("size-3.5", indicator.color)} />
+                            <span className="text-xs text-muted-foreground">
+                                {formattedStatus}
+                            </span>
+                        </motion.div>
+                    </SimpleTooltip>
+                )}
+
+                {/* Timezone */}
+                <motion.div
+                    className="px-2 py-1.5 flex gap-2 items-center bg-muted/50 text-xs text-muted-foreground rounded-lg"
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                >
+                    <Clock className="size-3.5 text-primary" />
+                    <span>
+                        {timeInfo.time} EST ({timeInfo.difference})
+                    </span>
+                </motion.div>
+            </div>
         </div>
     );
 };

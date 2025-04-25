@@ -56,7 +56,7 @@ const Sidebar = ({
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{
                                     duration: 0.5,
-                                    delay: 0.6 + index * 0.1,
+                                    delay: 0.4 + index * 0.1,
                                 }}
                             >
                                 <SocialLink social={social} hideName />

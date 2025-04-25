@@ -18,7 +18,7 @@ const Birthday = (): ReactElement => {
 
     return (
         <SimpleTooltip content={`My human uptime is ${milliseconds} millis (:`}>
-            <b className="text-primary/90 hover:text-primary transition-colors transform-gpu">
+            <b className="text-primary/85 hover:text-primary transition-colors transform-gpu">
                 {dayjs().diff(birthDate, "year")} year old
             </b>
         </SimpleTooltip>

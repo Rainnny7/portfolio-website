@@ -47,7 +47,10 @@ const AboutSection = ({
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, delay: 0.1 }}
             >
-                I&apos;m Braydon
+                I&apos;m{" "}
+                <span className="bg-gradient-to-br from-primary to-red-500/85 text-transparent bg-clip-text">
+                    Braydon
+                </span>
             </motion.h1>
             <motion.p
                 className="text-lg font-light text-muted-foreground"

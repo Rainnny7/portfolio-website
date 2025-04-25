@@ -10,7 +10,7 @@ const ExperienceTime = (): ReactElement => (
             dayjs().diff(experienceStartDate) / (1000 * 60 * 60)
         )} hours (:`}
     >
-        <b className="text-primary/90 hover:text-primary transition-colors transform-gpu">
+        <b className="text-primary/85 hover:text-primary transition-colors transform-gpu">
             {dayjs().diff(experienceStartDate, "year")} years
         </b>
     </SimpleTooltip>
