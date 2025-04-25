@@ -292,7 +292,6 @@ const OnekoKitty = (): ReactElement => {
         nekoElRef.current!.style.top = `${nekoPosY - 16}px`;
     }
 
-    return null;
+    return <></>;
 };
-
 export default OnekoKitty;
