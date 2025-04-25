@@ -1,10 +1,7 @@
-import dayjs, { Dayjs } from "dayjs";
 import { Github, Mail } from "lucide-react";
-import SimpleTooltip from "~/components/simple-tooltip";
+import Birthday from "~/components/landing/sections/about-section/birthday";
+import ExperienceTime from "~/components/landing/sections/about-section/experience-time";
 import { AppConfig } from "~/types/app-config";
-
-const birthDate: Dayjs = dayjs("2002-11-13");
-const experienceStartDate: Dayjs = dayjs("2016-09-01");
 
 export const appConfig: AppConfig = {
     discordUserId: "504147739131641857",
@@ -30,24 +27,10 @@ export const appConfig: AppConfig = {
     },
     about: (
         <span>
-            A passionate{" "}
-            <SimpleTooltip
-                content={`My human uptime is ${dayjs().diff(
-                    birthDate,
-                    "second"
-                )} seconds (:`}
-            >
-                <b className="text-primary/90 hover:text-primary transition-colors transform-gpu">
-                    {dayjs().diff(birthDate, "year")} year old
-                </b>
-            </SimpleTooltip>{" "}
-            software engineer living in Toronto, Canada. I primarily work with
-            the Java programming language and have{" "}
-            <b className="text-primary/90">
-                {dayjs().diff(experienceStartDate, "year")} years
-            </b>{" "}
-            of experience. Below is a list of my skills and technologies
-            I&apos;ve worked with:
+            A passionate <Birthday /> software engineer living in Toronto,
+            Canada. I primarily work with the Java programming language and have{" "}
+            <ExperienceTime /> of experience. Below is a list of my skills and
+            technologies I&apos;ve worked with:
         </span>
     ),
     skills: [
