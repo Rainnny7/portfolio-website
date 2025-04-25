@@ -50,8 +50,8 @@ const Project = ({
                     <MagicCard
                         className="relative w-full md:w-[21rem] xl:w-[24.5rem] rounded-lg"
                         gradientColor="#1C1C1C"
-                        gradientFrom="#AA0000"
-                        gradientTo="#FE5454"
+                        gradientFrom="var(--tertiary-darker)"
+                        gradientTo="var(--tertiary)"
                     >
                         {/* New Badge */}
                         {isNew ? (
@@ -160,7 +160,7 @@ const Project = ({
                                         content="This repository is pinned!"
                                         side="bottom"
                                     >
-                                        <Pin className="size-4 text-red-500" />
+                                        <Pin className="size-4 text-tertiary" />
                                     </SimpleTooltip>
                                 )}
                             </div>

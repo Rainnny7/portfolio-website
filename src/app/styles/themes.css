@@ -29,6 +29,7 @@
     --color-primary-foreground: var(--primary-foreground);
     --color-primary: var(--primary);
     --color-tertiary: var(--tertiary);
+    --color-tertiary-darker: var(--tertiary-darker);
     --color-popover-foreground: var(--popover-foreground);
     --color-popover: var(--popover);
     --color-card-foreground: var(--card-foreground);
@@ -77,6 +78,7 @@
     --input: oklch(1 0 0 / 15%);
     --ring: oklch(0.552 0.016 285.938);
     --tertiary: oklch(0.704 0.191 22.216 / 75%);
+    --tertiary-darker: oklch(0.704 0.191 22.216 / 0.03);
     --chart-1: oklch(0.488 0.243 264.376);
     --chart-2: oklch(0.696 0.17 162.48);
     --chart-3: oklch(0.769 0.188 70.08);
@@ -96,4 +98,5 @@
 .blue {
     --primary: oklch(0.56 0.2441 275.12);
     --tertiary: oklch(0.92 0.1365 195.03);
+    --tertiary-darker: oklch(0.92 0.1365 195.03 / 0.03);
 }
