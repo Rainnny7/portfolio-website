@@ -56,9 +56,9 @@ const LandingSection = ({
     id,
     icon: Icon,
     title,
-    titleDurationDelay = 0.1,
+    titleDurationDelay = 0.6,
     description,
-    descriptionDurationDelay = 0.2,
+    descriptionDurationDelay = 0.7,
     children,
     ...props
 }: LandingSectionProps): ReactElement => (
@@ -91,7 +91,7 @@ const LandingSection = ({
         </div>
 
         {/* Content */}
-        <div className="flex gap-1 items-center">{children}</div>
+        <div className="flex gap-1">{children}</div>
     </section>
 );
 export default LandingSection;

@@ -43,7 +43,6 @@ const ProjectsSection = (): ReactElement => {
     return (
         <LandingSection
             id="projects"
-            className="pt-40 flex flex-col gap-4"
             icon={Briefcase}
             title="My Projects"
             description="Here are some of the projects I've worked on!"
@@ -52,7 +51,7 @@ const ProjectsSection = (): ReactElement => {
             {isLoading ? (
                 // Loading state
                 <motion.div
-                    className="flex flex-wrap gap-2 items-center"
+                    className="w-full flex flex-wrap gap-2 items-center"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
