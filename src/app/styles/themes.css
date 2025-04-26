@@ -34,6 +34,12 @@
     --color-popover: var(--popover);
     --color-card-foreground: var(--card-foreground);
     --color-card: var(--card);
+    --color-github-stage-one: var(--github-stage-one);
+    --color-github-stage-two: var(--github-stage-two);
+    --color-github-stage-three: var(--github-stage-three);
+    --color-github-stage-four: var(--github-stage-four);
+    --color-github-stage-five: var(--github-stage-five);
+
     --radius-sm: calc(var(--radius) - 4px);
     --radius-md: calc(var(--radius) - 2px);
     --radius-lg: var(--radius);
@@ -59,6 +65,7 @@
 /* The Default Theme */
 :root {
     --radius: 0.625rem;
+
     --background: oklch(0.141 0.005 285.823);
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.21 0.006 285.885);
@@ -92,6 +99,12 @@
     --sidebar-accent-foreground: oklch(0.985 0 0);
     --sidebar-border: oklch(1 0 0 / 10%);
     --sidebar-ring: oklch(0.552 0.016 285.938);
+
+    --github-stage-one: oklch(87.1 0.006 286.286);
+    --github-stage-two: oklch(0.34 0.073 156.73);
+    --github-stage-three: oklch(0.47 0.126255 150.8624);
+    --github-stage-four: oklch(0.64 0.1777 146.24);
+    --github-stage-five: oklch(0.76 0.2121 145.62);
 }
 
 /* The Red Theme */

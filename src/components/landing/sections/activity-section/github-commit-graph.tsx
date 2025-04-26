@@ -315,9 +315,9 @@ const generateCalendarData = (
 };
 
 const getColor = (count: number) => {
-    if (count === 0) return "bg-zinc-300/10";
-    if (count <= 3) return "bg-[#0e4429]";
-    if (count <= 6) return "bg-[#006d32]";
-    if (count <= 9) return "bg-[#26a641]";
-    return "bg-[#39d353]";
+    if (count === 0) return "bg-github-stage-one/10";
+    if (count <= 3) return "bg-github-stage-two";
+    if (count <= 6) return "bg-github-stage-three";
+    if (count <= 9) return "bg-github-stage-four";
+    return "bg-github-stage-five";
 };
