@@ -1,4 +1,5 @@
 import { Github, Mail } from "lucide-react";
+import Image from "next/image";
 import Birthday from "~/components/landing/sections/about-section/birthday";
 import ExperienceTime from "~/components/landing/sections/about-section/experience-time";
 import { AppConfig } from "~/types/app-config";
@@ -27,8 +28,19 @@ export const appConfig: AppConfig = {
     },
     about: (
         <span>
-            A passionate <Birthday /> software engineer living in Toronto,
-            Canada. I primarily work with the Java programming language and have{" "}
+            A passionate <Birthday /> software engineer living in{" "}
+            <span className="pl-1 inline-flex gap-1 items-center">
+                <Image
+                    src="https://flagcdn.com/h24/ca.png"
+                    alt="Canadian Flag"
+                    width={24}
+                    height={24}
+                    draggable={false}
+                    className="inline-block"
+                />
+                Toronto, Canada.
+            </span>{" "}
+            I primarily work with the Java programming language and have{" "}
             <ExperienceTime /> of experience. Below is a list of my skills and
             technologies I&apos;ve worked with:
         </span>
