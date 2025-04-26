@@ -32,7 +32,7 @@ const MediaSection = () => {
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.35, delay: 0.8 }}
+                transition={{ duration: 0.25, delay: 0.8 }}
             >
                 This section isn&apos;t finished yet.
             </motion.p>

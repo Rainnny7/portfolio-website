@@ -42,7 +42,7 @@ const Project = ({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{
-                    duration: 0.35,
+                    duration: 0.25,
                     delay: index * 0.1,
                 }}
             >

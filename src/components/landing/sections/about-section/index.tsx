@@ -32,7 +32,7 @@ const AboutSection = ({
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.35 }}
+                transition={{ duration: 0.25 }}
             >
                 <Briefcase className="size-4 text-primary" />
                 Looking to hire me? Let&apos;s talk!
@@ -47,7 +47,7 @@ const AboutSection = ({
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.35, delay: 0.1 }}
+                transition={{ duration: 0.25, delay: 0.1 }}
             >
                 <Image
                     className="hidden xs:block lg:hidden"
@@ -89,7 +89,7 @@ const AboutSection = ({
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.35, delay: 0.2 }}
+                transition={{ duration: 0.25, delay: 0.2 }}
             >
                 Self-Taught Software Engineer & System Administrator
             </motion.p>
@@ -104,7 +104,7 @@ const AboutSection = ({
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true, margin: "-100px" }}
                             transition={{
-                                duration: 0.35,
+                                duration: 0.25,
                                 delay: 0.3 + index * 0.1,
                             }}
                         >
@@ -121,7 +121,7 @@ const AboutSection = ({
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.35, delay: 0.3 }}
+            transition={{ duration: 0.25, delay: 0.3 }}
         >
             {appConfig.about}
         </motion.p>
@@ -133,7 +133,7 @@ const AboutSection = ({
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{
-                duration: 0.35,
+                duration: 0.25,
                 delay: 0.5,
                 staggerChildren: 0.05,
                 delayChildren: 0.1,
@@ -151,7 +151,7 @@ const AboutSection = ({
             className="max-w-md lg:hidden"
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, delay: 0.6 }}
+            transition={{ duration: 0.25, delay: 0.6 }}
         >
             <SpotifyStatus discordUser={discordUser} />
         </motion.div>
