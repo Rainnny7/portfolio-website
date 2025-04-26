@@ -1,13 +1,19 @@
 "use server";
 
 import { getPresignedUrl, listMediaObjects } from "~/lib/minio";
+import { MediaFile } from "~/types/media";
 
-export const getMedia = async (): Promise<Record<string, string>> => {
+export const getMedia = async (): Promise<MediaFile[]> => {
     const objects = await listMediaObjects("random");
-    const urls: Record<string, string> = {};
+    const mediaItems: MediaFile[] = [];
 
     for (const object of objects) {
-        urls[object] = await getPresignedUrl(object);
+        const url = await getPresignedUrl(object);
+        mediaItems.push({
+            id: object,
+            name: object.split("/").pop()?.split(".")[0] ?? object,
+            url,
+        });
     }
-    return urls;
+    return mediaItems;
 };

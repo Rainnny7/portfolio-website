@@ -21,7 +21,7 @@ const LandingPage = (): ReactElement => {
             <Sidebar discordUser={discordUser} />
 
             {/* Content */}
-            <div className="relative w-full px-7 lg:px-10 xl:px-16 flex flex-col transition-all transform-gpu overflow-hidden">
+            <div className="relative w-full px-7 lg:px-10 xl:px-16 pb-16 flex flex-col transition-all transform-gpu overflow-hidden">
                 <AboutSection discordUser={discordUser} />
                 <ProjectsSection />
                 <ActivitySection />
