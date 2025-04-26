@@ -148,12 +148,12 @@ export const appConfig: AppConfig = {
         {
             id: "default",
             name: "Default",
-            color: "#FE5454",
+            color: "#5555FF",
         },
         {
-            id: "blue",
-            name: "Blue",
-            color: "#5555FF",
+            id: "red",
+            name: "Red",
+            color: "#FE5454",
         },
         {
             id: "purple",

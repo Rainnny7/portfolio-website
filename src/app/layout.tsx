@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     },
     twitter: { card: "summary" },
 };
-export const viewport: Viewport = { themeColor: "#CC1D1D" };
+export const viewport: Viewport = { themeColor: "#5555FF" };
 
 const roboto = Roboto({
     variable: "--font-geist-sans",
