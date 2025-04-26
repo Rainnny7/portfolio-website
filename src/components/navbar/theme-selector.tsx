@@ -1,6 +1,6 @@
 import { Paintbrush2 } from "lucide-react";
 import { useTheme } from "next-themes";
-import { ReactElement } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { appConfig } from "~/app/config";
 import SimpleTooltip from "~/components/simple-tooltip";
@@ -15,10 +15,17 @@ import { SiteTheme } from "~/types/app-config";
 
 const ThemeSelector = (): ReactElement => {
     const { setTheme, theme } = useTheme();
-    const currentTheme =
-        appConfig.themes.find(
-            (otherTheme: SiteTheme) => otherTheme.id === theme
-        ) || appConfig.themes[0];
+    const [currentTheme, setCurrentTheme] = useState<SiteTheme>(
+        appConfig.themes[0]
+    );
+
+    useEffect(() => {
+        setCurrentTheme(
+            appConfig.themes.find(
+                (otherTheme: SiteTheme) => otherTheme.id === theme
+            ) || appConfig.themes[0]
+        );
+    }, [theme]);
 
     return (
         <Popover>
@@ -26,11 +33,13 @@ const ThemeSelector = (): ReactElement => {
                 <div>
                     <SimpleTooltip content="Switch Themes" side="bottom">
                         <Button
-                            className="size-8 rounded-xl hover:bg-zinc-900/55 transition-all transform-gpu"
+                            className={cn(
+                                "size-8 rounded-xl hover:bg-zinc-900/55 transition-all transform-gpu",
+                                currentTheme && "bg-zinc-900/55"
+                            )}
                             variant="ghost"
                             size="icon"
                             style={{
-                                backgroundColor: `${currentTheme.color}20`,
                                 color: currentTheme.color,
                             }}
                         >
@@ -41,7 +50,8 @@ const ThemeSelector = (): ReactElement => {
             </PopoverTrigger>
             <PopoverContent className="w-32 p-1.5 bg-background/70 backdrop-blur-md border border-border rounded-xl">
                 {appConfig.themes.map((themeOption: SiteTheme) => {
-                    const isActive: boolean = theme === themeOption.id;
+                    const isActive: boolean =
+                        currentTheme.id === themeOption.id;
                     return (
                         <Button
                             key={themeOption.id}
