@@ -1,6 +1,7 @@
 import { Paintbrush2 } from "lucide-react";
 import { useTheme } from "next-themes";
 import { ReactElement } from "react";
+import { toast } from "sonner";
 import { appConfig } from "~/app/config";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
@@ -50,7 +51,12 @@ const ThemeSelector = (): ReactElement => {
                                     "bg-zinc-900/55 text-primary/85 hover:text-primary/85"
                             )}
                             variant="ghost"
-                            onClick={() => setTheme(themeOption.id)}
+                            onClick={() => {
+                                setTheme(themeOption.id);
+                                toast.success(
+                                    `Switched to the ${themeOption.name} theme!`
+                                );
+                            }}
                         >
                             <div
                                 className="p-1 rounded-full"
