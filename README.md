@@ -30,6 +30,6 @@
 
 <!-- Preview -->
 ## Preview
-![Site Preview](https://cdn.rainnny.club/y3QzoDK0.mp4)
+![Site Preview](https://cdn.rainnny.club/Boj5NSme.gif)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
