@@ -144,4 +144,16 @@ export const appConfig: AppConfig = {
             link: "https://www.nginx.com",
         },
     ],
+    themes: [
+        {
+            id: "default",
+            name: "Default",
+            color: "#FE5454",
+        },
+        {
+            id: "blue",
+            name: "Blue",
+            color: "#5555FF",
+        },
+    ],
 };

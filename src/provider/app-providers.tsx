@@ -8,6 +8,7 @@ import { Toaster } from "~/components/ui/sonner";
 import { TooltipProvider } from "~/components/ui/tooltip";
 import KittyProvider from "~/provider/kitty-provider";
 import ThemeProvider from "~/provider/theme-provider";
+import { SiteTheme } from "~/types/app-config";
 
 const queryClient = new QueryClient();
 
@@ -45,8 +46,10 @@ const AppProviders = ({ children }: { children: ReactNode }) => {
             <ViewTransitions>
                 <ThemeProvider
                     attribute="class"
-                    defaultTheme="default"
-                    themes={["default", "blue"]}
+                    defaultTheme={appConfig.themes[0].id}
+                    themes={appConfig.themes.map(
+                        (theme: SiteTheme) => theme.id
+                    )}
                 >
                     <TooltipProvider delayDuration={100}>
                         <KittyProvider>
