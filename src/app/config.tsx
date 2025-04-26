@@ -155,5 +155,15 @@ export const appConfig: AppConfig = {
             name: "Blue",
             color: "#5555FF",
         },
+        {
+            id: "purple",
+            name: "Purple",
+            color: "#9900FF",
+        },
+        {
+            id: "green",
+            name: "Green",
+            color: "#00FF00",
+        },
     ],
 };

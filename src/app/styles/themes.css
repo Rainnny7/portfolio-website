@@ -100,3 +100,17 @@
     --tertiary: oklch(0.92 0.1365 195.03);
     --tertiary-darker: oklch(0.92 0.1365 195.03 / 0.03);
 }
+
+/* The Purple Theme */
+.purple {
+    --primary: oklch(0.52 0.238004 328.3634);
+    --tertiary: oklch(0.74 0.2718 327.9);
+    --tertiary-darker: oklch(0.74 0.2718 327.9 / 0.03);
+}
+
+/* The Green Theme */
+.green {
+    --primary: oklch(0.64 0.217588 142.4953);
+    --tertiary: oklch(0.88 0.2522 143.06);
+    --tertiary-darker: oklch(0.88 0.2522 143.06 / 0.03);
+}
