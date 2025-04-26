@@ -114,3 +114,10 @@
     --tertiary: oklch(0.88 0.2522 143.06);
     --tertiary-darker: oklch(0.88 0.2522 143.06 / 0.03);
 }
+
+/* The Yellow Theme */
+.yellow {
+    --primary: oklch(0.8 0.1705 73.27);
+    --tertiary: oklch(0.97 0.1832 109.38);
+    --tertiary-darker: oklch(0.97 0.1832 109.38 / 0.03);
+}

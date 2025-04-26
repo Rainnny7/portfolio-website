@@ -165,5 +165,10 @@ export const appConfig: AppConfig = {
             name: "Green",
             color: "#00FF00",
         },
+        {
+            id: "yellow",
+            name: "Yellow",
+            color: "#FFFF00",
+        },
     ],
 };
