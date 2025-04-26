@@ -1,42 +1,10 @@
-import {
-    BellMinus,
-    Circle,
-    CircleX,
-    Clock,
-    LucideIcon,
-    Moon,
-} from "lucide-react";
+import { Clock } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
 import { DiscordUser } from "use-tether";
+import DiscordStatus from "~/components/landing/discord-status";
 import SimpleTooltip from "~/components/simple-tooltip";
-import { capitalizeWords } from "~/lib/string";
-import { cn } from "~/lib/utils";
-
-type Indicator = {
-    icon: LucideIcon;
-    color: string;
-};
-
-const indicators: Record<DiscordUser["onlineStatus"], Indicator> = {
-    DO_NOT_DISTURB: {
-        icon: BellMinus,
-        color: "text-red-400",
-    },
-    IDLE: {
-        icon: Moon,
-        color: "text-yellow-500",
-    },
-    ONLINE: {
-        icon: Circle,
-        color: "text-green-500",
-    },
-    OFFLINE: {
-        icon: CircleX,
-        color: "text-gray-500",
-    },
-};
 
 const SidebarIntroduction = ({
     discordUser,
@@ -83,13 +51,6 @@ const SidebarIntroduction = ({
         return () => clearInterval(interval);
     }, []);
 
-    const formattedStatus: string | undefined = discordUser
-        ? capitalizeWords(discordUser?.onlineStatus.replaceAll("_", " "))
-        : undefined;
-    const indicator: Indicator =
-        indicators[discordUser?.onlineStatus ?? "OFFLINE"];
-    const Icon: LucideIcon = indicator.icon;
-
     return (
         <div className="flex flex-col gap-3.5 items-center">
             {/* Introduction */}
@@ -129,34 +90,13 @@ const SidebarIntroduction = ({
             {/* Online Status & Timezone */}
             <div className="flex flex-col gap-1.5 items-center">
                 {discordUser && (
-                    <SimpleTooltip
-                        content={
-                            <span className="flex gap-1 items-center">
-                                <Image
-                                    className="pr-0.5"
-                                    src="/media/discord.png"
-                                    alt="Discord"
-                                    width={15}
-                                    height={15}
-                                    draggable={false}
-                                />
-                                Currently on <b>{formattedStatus}</b>
-                            </span>
-                        }
-                        side="right"
+                    <motion.div
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
                     >
-                        <motion.div
-                            className="group flex gap-2 items-center"
-                            initial={{ opacity: 0, y: -20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5, delay: 0.3 }}
-                        >
-                            <Icon className={cn("size-3.5", indicator.color)} />
-                            <span className="text-xs text-muted-foreground group-hover:opacity-90 transition-opacity transform-gpu">
-                                {formattedStatus}
-                            </span>
-                        </motion.div>
-                    </SimpleTooltip>
+                        <DiscordStatus discordUser={discordUser} />
+                    </motion.div>
                 )}
 
                 {/* Timezone */}

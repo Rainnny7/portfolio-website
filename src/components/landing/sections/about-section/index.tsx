@@ -8,6 +8,7 @@ import { ReactElement } from "react";
 import { DiscordUser } from "use-tether";
 import { appConfig } from "~/app/config";
 import AnimatedRightChevron from "~/components/animated-right-chevron";
+import DiscordStatus from "~/components/landing/discord-status";
 import AboutSkill from "~/components/landing/sections/about-section/skill";
 import SocialLink from "~/components/landing/social-link";
 import SpotifyStatus from "~/components/landing/spotify-status";
@@ -57,16 +58,27 @@ const AboutSection = ({
                     draggable={false}
                 />
                 <span className="lg:hidden">Hi, </span>I&apos;m{" "}
-                <span className="flex items-center gap-2.5">
-                    <Image
-                        className="lg:hidden rounded-full aspect-square object-cover"
-                        src="/media/me.png"
-                        alt="Hey, it's me!"
-                        width={40}
-                        height={40}
-                        priority
-                        draggable={false}
-                    />
+                <span className="flex gap-2.5 items-center">
+                    <div className="lg:hidden relative">
+                        <Image
+                            className="rounded-full aspect-square object-cover"
+                            src="/media/me.png"
+                            alt="Hey, it's me!"
+                            width={40}
+                            height={40}
+                            priority
+                            draggable={false}
+                        />
+
+                        {/* Discord Status */}
+                        {discordUser && (
+                            <DiscordStatus
+                                className="absolute -bottom-1.5 -right-1.5 p-1 bg-background/85 rounded-xl"
+                                discordUser={discordUser}
+                                hideName
+                            />
+                        )}
+                    </div>
                     <span className="bg-gradient-to-br from-primary to-tertiary text-transparent bg-clip-text">
                         Braydon
                     </span>

@@ -15,7 +15,7 @@ const Background = (): ReactElement => (
         />
         <HeroPattern />
         <Particles
-            className="absolute inset-0 opacity-35 z-0"
+            className="hidden md:block absolute inset-0 opacity-35 z-0"
             ease={80}
             refresh
         />
