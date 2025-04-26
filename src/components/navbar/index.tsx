@@ -15,6 +15,7 @@ import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { ReactElement, useEffect, useState } from "react";
 import { toast } from "sonner";
+import ThemeSelector from "~/components/navbar/theme-selector";
 import SimpleTooltip from "~/components/simple-tooltip";
 import { Button } from "~/components/ui/button";
 import { cn } from "~/lib/utils";
@@ -193,6 +194,9 @@ const Navbar = (): ReactElement => {
                     <KittyToggle />
                 </div>
             </SimpleTooltip>
+
+            {/* Theme Selector */}
+            <ThemeSelector />
         </motion.nav>
     );
 };
@@ -202,7 +206,7 @@ const KittyToggle = (): ReactElement => {
     return (
         <Button
             className={cn(
-                "hidden md:block size-8 rounded-xl hover:bg-zinc-900/55 transition-all transform-gpu",
+                "hidden md:flex size-8 rounded-xl hover:bg-zinc-900/55 transition-all transform-gpu",
                 showKitty && "bg-zinc-900/55 text-primary/85 hover:text-primary"
             )}
             variant="ghost"

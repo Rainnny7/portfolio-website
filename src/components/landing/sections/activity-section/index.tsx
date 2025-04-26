@@ -12,7 +12,7 @@ const ActivitySection = () => (
         title={
             <span>
                 My{" "}
-                <span className="bg-gradient-to-br from-primary to-red-500/75 text-transparent bg-clip-text">
+                <span className="bg-gradient-to-br from-primary to-tertiary text-transparent bg-clip-text">
                     Activity
                 </span>
             </span>

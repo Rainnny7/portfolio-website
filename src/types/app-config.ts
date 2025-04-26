@@ -15,9 +15,16 @@ export type Skill = {
     link: string;
 };
 
+export type SiteTheme = {
+    id: string;
+    name: string;
+    color: string;
+};
+
 export type AppConfig = {
     discordUserId: Snowflake;
     socials: Record<"discord" | "github" | "email", SocialConfig>;
     about: ReactNode;
     skills: Skill[];
+    themes: SiteTheme[];
 };

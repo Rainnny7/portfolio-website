@@ -1,4 +1,11 @@
-import { Circle, CircleX, Clock, LucideIcon } from "lucide-react";
+import {
+    BellMinus,
+    Circle,
+    CircleX,
+    Clock,
+    LucideIcon,
+    Moon,
+} from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import { ReactElement, useEffect, useState } from "react";
@@ -14,11 +21,11 @@ type Indicator = {
 
 const indicators: Record<DiscordUser["onlineStatus"], Indicator> = {
     DO_NOT_DISTURB: {
-        icon: CircleX,
-        color: "text-primary",
+        icon: BellMinus,
+        color: "text-red-400",
     },
     IDLE: {
-        icon: Circle,
+        icon: Moon,
         color: "text-yellow-500",
     },
     ONLINE: {
