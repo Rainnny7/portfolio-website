@@ -121,3 +121,10 @@
     --tertiary: oklch(0.97 0.1832 109.38);
     --tertiary-darker: oklch(0.97 0.1832 109.38 / 0.03);
 }
+
+/* The Gray Theme */
+.gray {
+    --primary: oklch(0.45 0 0);
+    --tertiary: oklch(0.74 0 0);
+    --tertiary-darker: oklch(0.74 0 0 / 0.03);
+}
