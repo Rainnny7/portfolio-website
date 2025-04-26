@@ -57,7 +57,7 @@ const SidebarIntroduction = ({
             <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 }}
+                transition={{ duration: 0.35, delay: 0.1 }}
             >
                 <Image
                     className="rounded-full aspect-square object-cover"
@@ -75,7 +75,7 @@ const SidebarIntroduction = ({
                 className="flex gap-2.5 items-center"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.35, delay: 0.2 }}
             >
                 <Image
                     src="/media/wave.gif"
@@ -93,7 +93,7 @@ const SidebarIntroduction = ({
                     <motion.div
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
+                        transition={{ duration: 0.35, delay: 0.3 }}
                     >
                         <DiscordStatus discordUser={discordUser} />
                     </motion.div>
@@ -113,7 +113,7 @@ const SidebarIntroduction = ({
                         className="group flex gap-2 items-center"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.75 }}
+                        transition={{ duration: 0.35, delay: 0.75 }}
                     >
                         <Clock className="size-3.5 text-primary" />
                         <span className="text-xs text-muted-foreground group-hover:opacity-90 transition-opacity transform-gpu">

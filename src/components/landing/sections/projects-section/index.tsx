@@ -62,7 +62,7 @@ const ProjectsSection = (): ReactElement => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
-                    transition={{ duration: 0.5, delay: 0.7 }}
+                    transition={{ duration: 0.35, delay: 0.7 }}
                 >
                     {Array.from({ length: 5 }).map((_, index: number) => (
                         <Skeleton
@@ -92,7 +92,7 @@ const ProjectsSection = (): ReactElement => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{
-                            duration: 0.5,
+                            duration: 0.35,
                             delay:
                                 1.2 +
                                 (pagedProjects?.metadata.end ??

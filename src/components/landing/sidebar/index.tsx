@@ -32,7 +32,7 @@ const Sidebar = ({
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.6 }}
+                    transition={{ duration: 0.35, delay: 0.6 }}
                 >
                     <SpotifyStatus discordUser={discordUser} />
                 </motion.div>
@@ -41,7 +41,7 @@ const Sidebar = ({
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.5 }}
+                    transition={{ duration: 0.35, delay: 0.5 }}
                 >
                     <Separator className="my-3 w-full" />
                 </motion.div>
@@ -55,7 +55,7 @@ const Sidebar = ({
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{
-                                    duration: 0.5,
+                                    duration: 0.35,
                                     delay: 0.4 + index * 0.1,
                                 }}
                             >

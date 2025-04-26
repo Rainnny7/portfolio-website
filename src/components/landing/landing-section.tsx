@@ -74,7 +74,7 @@ const LandingSection = ({
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: titleDurationDelay }}
+                transition={{ duration: 0.35, delay: titleDurationDelay }}
             >
                 <Icon className="p-2 size-10 bg-primary/20 border border-border rounded-lg" />
                 {title}
@@ -84,7 +84,7 @@ const LandingSection = ({
                 initial={{ opacity: 0, y: -20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.5, delay: descriptionDurationDelay }}
+                transition={{ duration: 0.35, delay: descriptionDurationDelay }}
             >
                 {description}
             </motion.p>

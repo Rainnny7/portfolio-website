@@ -32,7 +32,7 @@ const NotFoundContent = (): ReactElement => {
                     className="text-4xl font-bold"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
+                    transition={{ duration: 0.35, delay: 0.2 }}
                 >
                     Page not found ):
                 </motion.h1>
@@ -40,7 +40,7 @@ const NotFoundContent = (): ReactElement => {
                     className="max-w-sm text-lg text-muted-foreground font-light"
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
+                    transition={{ duration: 0.35, delay: 0.3 }}
                 >
                     The page you are looking for does not exist.
                 </motion.p>
@@ -48,7 +48,7 @@ const NotFoundContent = (): ReactElement => {
                 <motion.div
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: 0.4 }}
+                    transition={{ duration: 0.35, delay: 0.4 }}
                 >
                     <Button
                         className="group mt-3.5 w-fit gap-1"
